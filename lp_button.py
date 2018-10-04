@@ -1,3 +1,5 @@
+import copy
+
 def get_button_events(lp_object):
     button_events = list()
     while True:
@@ -22,11 +24,11 @@ def get_button_status(lp_object):
     
     if status == None:
         status = {k:list() for k in ["state", "changed", "pressed", "released"]}
-        status["state"] = list(empty)
+        status["state"] = copy.deepcopy(empty)
     
-    status["changed"] = list(empty)
-    status["pressed"] = list(empty)
-    status["released"] = list(empty)
+    status["changed"] = copy.deepcopy(empty)
+    status["pressed"] = copy.deepcopy(empty)
+    status["released"] = copy.deepcopy(empty)
     
     button_events = get_button_events(lp_object)
     for event in button_events:
