@@ -13,7 +13,7 @@ Nope. As of writing, I have only written a button parser and the start of an eve
 ## What still needs to be written?
 ### Global
 * ~~Launchpad MkII Specific Interface~~
-* An event system for button presses
+* ~~An event system for button presses~~
 * Simple light feedback
 * Generalize to all Launchpads
 * Advanced light feedback effects
