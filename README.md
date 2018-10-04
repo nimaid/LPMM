@@ -14,7 +14,7 @@ Nope. As of writing, I have only written a button parser and the start of an eve
 ### Global
 * ~~Launchpad MkII Specific Interface~~
 * ~~An event system for button presses~~
-* Simple light feedback
+* ~~Simple light feedback~~
 * Generalize to all Launchpads
 * Advanced light feedback effects
 ### Instrument Mode / Scale Edit Mode
