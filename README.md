@@ -1,4 +1,4 @@
-# LaunchpadMiddleman
+# LPMM - Novation Launchpad Middleman
 A middleman script to unlock the full potential of the Novation Launchpad in any MIDI-enabled program.
 
 ## What does it do?
