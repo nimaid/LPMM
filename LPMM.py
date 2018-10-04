@@ -1,4 +1,5 @@
 import sys
+
 try:
     import launchpad_py as launchpad
 except ImportError:
@@ -6,7 +7,9 @@ except ImportError:
         import launchpad
     except ImportError:
         sys.exit("error loading lauchpad.py")
-import lp_events
+
+import lp_button, lp_colors
+
 
 lp = launchpad.LaunchpadMk2();
 
@@ -20,6 +23,10 @@ def main():
     lp.ButtonFlush()
     
     
+
+def loop():
+    while True:
+        return
 
 main()
 
