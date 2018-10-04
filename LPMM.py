@@ -8,10 +8,16 @@ except ImportError:
     except ImportError:
         sys.exit("error loading lauchpad.py")
 
-import lp_button, lp_colors
+import lp_events, lp_colors
 
 
 lp = launchpad.LaunchpadMk2();
+
+def hello():
+    print("Hello")
+
+def goodbye():
+    print("Goodbye")
 
 def main():
     if lp.Open(0, "mk2"):
@@ -22,11 +28,11 @@ def main():
     
     lp.ButtonFlush()
     
+    lp_events.press_funcs[0][1] = hello
+    lp_events.release_funcs[0][1] = goodbye
     
-
-def loop():
     while True:
-        return
+        lp_events.run(lp)
 
 main()
 
