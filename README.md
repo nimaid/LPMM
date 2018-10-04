@@ -14,7 +14,7 @@ Nope. As of writing, I have only done some "Hello World" tests with the launchpa
 ### Global
 * An event system for button presses
 * Simple light feedback
-* (Optional) Advanced light feedback effects
+* Advanced light feedback effects
 ### Instrument Mode / Scale Edit Mode
 * A basic major scale
 * A key and octave selector
