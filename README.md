@@ -12,8 +12,10 @@ Nope. As of writing, I have only done some "Hello World" tests with the launchpa
 
 ## What still needs to be written?
 ### Global
+* ~~Launchpad MkII Specific Interface~~
 * An event system for button presses
 * Simple light feedback
+* Generalize to all Launchpads
 * Advanced light feedback effects
 ### Instrument Mode / Scale Edit Mode
 * A basic major scale
