@@ -1,4 +1,4 @@
-import sys
+import sys, pygame
 
 try:
     import launchpad_py as launchpad
@@ -8,16 +8,10 @@ except ImportError:
     except ImportError:
         sys.exit("error loading lauchpad.py")
 
-import lp_events, lp_colors
+import lp_events, lp_colors, lp_midi
 
 
 lp = launchpad.LaunchpadMk2();
-
-def hello():
-    print("Hello")
-
-def goodbye():
-    print("Goodbye")
 
 def init():
     lp.ButtonFlush()
@@ -31,9 +25,6 @@ def main():
         return
     
     init()
-    
-    lp_events.press_funcs[0][1] = hello
-    lp_events.release_funcs[0][1] = goodbye
     
 
 main()

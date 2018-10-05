@@ -37,6 +37,7 @@ lp_object = None
 def init(lp_object_in):
     global lp_object
     lp_object = lp_object_in
+    lp_object.LedAllOn(BLACK)
 
 def setXY(x, y, color):
     curr_colors[x][y] = color
