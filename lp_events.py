@@ -1,5 +1,7 @@
-import copy, _thread
+import copy, threading, time
 import lp_colors
+
+RUN_DELAY = 0.01
 
 def nop():
     return None
@@ -7,7 +9,14 @@ def nop():
 press_funcs = [[nop for y in range(9)] for x in range(9)]
 release_funcs = copy.deepcopy(press_funcs)
 
+timer = None
+
+def init(lp_object):
+    global timer
+    timer = threading.Timer(RUN_DELAY, run, [lp_object])
+
 def run(lp_object):
+    global timer
     while True:
         event = lp_object.ButtonStateXY()
         if event != []:
@@ -20,12 +29,10 @@ def run(lp_object):
                 press_funcs[event[0]][event[1]]()
         else:
             break
-
-def poll_loop(lp_object):
-    while True:
-        run(lp_object)
+    init(lp_object)
+    timer.start()
 
 def start(lp_object):
-    _thread.start_new_thread(poll_loop, (lp_object, ))
-
+    init(lp_object)
+    run(lp_object)
 

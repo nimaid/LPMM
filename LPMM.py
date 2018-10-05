@@ -32,9 +32,6 @@ def main():
     lp_events.press_funcs[0][1] = hello
     lp_events.release_funcs[0][1] = goodbye
     
-    
-    while True:
-        lp_events.nop()
 
 main()
 
