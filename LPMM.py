@@ -27,11 +27,11 @@ def main():
         return
     
     lp.ButtonFlush()
+    lp_events.start(lp)
     
     lp_events.press_funcs[0][1] = hello
     lp_events.release_funcs[0][1] = goodbye
     
-    lp_events.start(lp)
     
     while True:
         lp_events.nop()
