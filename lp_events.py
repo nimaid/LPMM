@@ -1,4 +1,4 @@
-import copy
+import copy, _thread
 import lp_colors
 
 def nop():
@@ -20,5 +20,12 @@ def run(lp_object):
                 press_funcs[event[0]][event[1]]()
         else:
             break
+
+def poll_loop(lp_object):
+    while True:
+        run(lp_object)
+
+def start(lp_object):
+    _thread.start_new_thread(poll_loop, (lp_object, ))
 
 
