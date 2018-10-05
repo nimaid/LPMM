@@ -21,11 +21,10 @@ def run(lp_object):
         event = lp_object.ButtonStateXY()
         if event != []:
             if event[2] == 0:
-                old_color = lp_colors.curr_colors[event[0]][event[1]]
-                lp_object.LedCtrlXYByCode(event[0], event[1], old_color)
+                lp_colors.off_effect(event[0], event[1])
                 release_funcs[event[0]][event[1]]()
             else:
-                lp_object.LedCtrlXYByCode(event[0], event[1], lp_colors.GREEN)
+                lp_colors.on_effect(event[0], event[1])
                 press_funcs[event[0]][event[1]]()
         else:
             break
@@ -33,6 +32,7 @@ def run(lp_object):
     timer.start()
 
 def start(lp_object):
+    lp_colors.init(lp_object)
     init(lp_object)
     run(lp_object)
 

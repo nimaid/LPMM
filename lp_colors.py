@@ -1,35 +1,3 @@
-def HSV_to_RGB(h, s, v):
-    h = h % 360 #remove full revolutions
-    s = min(max(s, 0), 100) / 100 #limit to 0-1
-    v = min(max(v, 0), 100) / 100 #limit to 0-1
-    
-    c = v * s
-    hp = h / 60
-    x = c * (1 - abs((hp % 2) - 1))
-    
-    RGBp = []
-    if hp < 1:
-        RGBp = [c, x, 0]
-    elif hp < 2:
-        RGBp = [x, c, 0]
-    elif hp < 3:
-        RGBp = [0, c, x]
-    elif hp < 4:
-        RGBp = [0, x, c]
-    elif hp < 5:
-        RGBp = [x, 0, c]
-    elif hp < 6:
-        RGBp = [c, 0, x]
-    else:
-        RGBp = [0, 0, 0]
-    
-    m = v - c
-    RGB = []
-    for x in RGBp:
-        value = round((x + m) * 255)
-        RGB.append(value)
-    return RGB
-
 BLACK = 0
 DARK_GREY = 1
 GREY = 2
@@ -63,3 +31,24 @@ PURPLE_HALF = 49
 PURPLE_THIRD = 50
 
 curr_colors = [[BLACK for y in range(9)] for x in range(9)]
+
+lp_object = None
+
+def init(lp_object_in):
+    global lp_object
+    lp_object = lp_object_in
+
+def setXY(x, y, color):
+    curr_colors[x][y] = color
+    lp_object.LedCtrlXYByCode(x, y, color)
+
+def getXY(x, y):
+    return curr_colors[x][y]
+
+def on_effect(x, y):
+    lp_object.LedCtrlXYByCode(x, y, GREEN)
+
+def off_effect(x, y):
+    old_color = getXY(x, y)
+    lp_object.LedCtrlXYByCode(x, y, old_color)
+

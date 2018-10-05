@@ -19,6 +19,10 @@ def hello():
 def goodbye():
     print("Goodbye")
 
+def init():
+    lp.ButtonFlush()
+    lp_events.start(lp)
+
 def main():
     if lp.Open(0, "mk2"):
         print("Connected to Launchpad Mk2!")
@@ -26,8 +30,7 @@ def main():
         print("Could not connect to Launchpad Mk2, exiting...")
         return
     
-    lp.ButtonFlush()
-    lp_events.start(lp)
+    init()
     
     lp_events.press_funcs[0][1] = hello
     lp_events.release_funcs[0][1] = goodbye
