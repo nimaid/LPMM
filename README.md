@@ -16,7 +16,7 @@ Sort of! It does work as a middleman, but with almost none of the features I wan
 * ~~An event system for button presses~~
 * ~~Simple light feedback~~
 * ~~Make MIDI wrapper functions~~
-* Make light feedback light all of same note in Instrument Mode
+* ~~Make light feedback light all of same note in Instrument Mode~~
 * Generalize to all Launchpads
 * Advanced light feedback effects
 ### Instrument Mode / Scale Edit Mode

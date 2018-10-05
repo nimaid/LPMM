@@ -30,8 +30,6 @@ PURPLE = 48
 PURPLE_HALF = 49
 PURPLE_THIRD = 50
 
-import lp_instrument
-
 curr_colors = [[BLACK for y in range(9)] for x in range(9)]
 
 lp_object = None

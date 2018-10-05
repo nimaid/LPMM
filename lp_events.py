@@ -18,16 +18,22 @@ def init(lp_object):
     global timer
     timer = threading.Timer(RUN_DELAY, run, [lp_object])
 
+
 def run(lp_object):
     global timer
     while True:
         event = lp_object.ButtonStateXY()
         if event != []:
+            same_note = lp_instrument.get_keys_bound_to_same_note_as(event[0], event[1])
             if event[2] == 0:
-                lp_colors.off_effect(event[0], event[1])
+                for n in same_note:
+                    lp_colors.off_effect(n[0], n[1])
+                
                 release_funcs[event[0]][event[1]](event[0], event[1])
             else:
-                lp_colors.on_effect(event[0], event[1])
+                for n in same_note:
+                    lp_colors.on_effect(n[0], n[1])
+                
                 press_funcs[event[0]][event[1]](event[0], event[1])
         else:
             break
