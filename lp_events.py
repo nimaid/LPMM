@@ -25,15 +25,15 @@ def run(lp_object):
         event = lp_object.ButtonStateXY()
         if event != []:
             if lp_instrument.working_notes[8 - event[1]][event[0]] != None:
-                same_note = lp_instrument.get_keys_bound_to_same_note_as(event[0], event[1])
+                same_note = lp_instrument.get_keys_bound_to_same_note_as(event[0], event[1] - 1)
                 if event[2] == 0:
                     for n in same_note:
-                        lp_colors.off_effect(n[0], n[1])
+                        lp_colors.off_effect(n[0], n[1] + 1)
                     
                     release_funcs[event[0]][event[1]](event[0], event[1])
                 else:
                     for n in same_note:
-                        lp_colors.on_effect(n[0], n[1])
+                        lp_colors.on_effect(n[0], n[1] + 1)
                 
                     press_funcs[event[0]][event[1]](event[0], event[1])
             else:

@@ -85,10 +85,10 @@ def init():
 def get_keys_bound_to_same_note_as(x, y):
     note = working_notes[y][x]
     same_note = []
-    for x in range(8):
-        for y in range(8):
-            if working_notes[y][x] == note:
-                same_note.append((x, y))
+    for a in range(8):
+        for b in range(8):
+            if working_notes[b][a] == note:
+                same_note.append((a, b))
     return same_note
 
 def update():
