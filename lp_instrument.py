@@ -18,20 +18,23 @@ def init():
     global working_notes
     base_note = lp_midi.name_octave_to_note(key, octave)
     
-    working_notes = []
+    working_notes = [[]]
+    for x in range(9):
+        working_notes[0].append(None)
     for y in range(1, 9):
         working_notes.append([])
         oct = 7 - y
         for x in range(8):
             note = base_note + (oct * 12) + scale[x]
             working_notes[-1].append(note)
+        working_notes[-1].append(None)
 
 def get_keys_bound_to_same_note_as(x, y):
-    note = working_notes[y-1][x]
+    note = working_notes[y][x]
     same_note = []
     for x in range(8):
         for y in range(1, 9):
-            if working_notes[y-1][x] == note:
+            if working_notes[y][x] == note:
                 same_note.append((x, y))
     return same_note
 
@@ -41,7 +44,7 @@ def update():
     working_scale = [scale[n]+base_note for n in range(len(scale))]
     for y in range(1, 9):
         for x in range(8):
-            note = working_notes[y-1][x]
+            note = working_notes[y][x]
             lp_midi.bind_button_to_note(x, y, note)
             
             if note % 12 == base_note % 12:
