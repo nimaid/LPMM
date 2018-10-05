@@ -1,7 +1,7 @@
 import copy, threading, time
 import lp_colors, lp_instrument
 
-RUN_DELAY = 0.01
+RUN_DELAY = 0.005 #0.005 == 200 FPS
 
 def unbound_press(x, y):
     print("[UNBOUND BUTTON ("+str(x)+", "+str(y)+") PRESS] Doing nothing...\n>>> ", end = "")
@@ -24,7 +24,7 @@ def run(lp_object):
     while True:
         event = lp_object.ButtonStateXY()
         if event != []:
-            if lp_instrument.working_notes[event[1]][event[0]] != None:
+            if lp_instrument.working_notes[8 - event[1]][event[0]] != None:
                 same_note = lp_instrument.get_keys_bound_to_same_note_as(event[0], event[1])
                 if event[2] == 0:
                     for n in same_note:

@@ -32,6 +32,8 @@ PURPLE_THIRD = 50
 
 curr_colors = [[BLACK for y in range(9)] for x in range(9)]
 
+mode = "INSTRUMENT" #options: 
+
 lp_object = None
 
 def init(lp_object_in):
@@ -47,7 +49,9 @@ def getXY(x, y):
     return curr_colors[x][y]
 
 def on_effect(x, y):
-    lp_object.LedCtrlXYByCode(x, y, GREEN)
+    if mode == "INSTRUMENT":
+        if (x in range(8)) and (y in range(1, 9)):
+            lp_object.LedCtrlXYByCode(x, y, GREEN)
 
 def off_effect(x, y):
     old_color = getXY(x, y)
