@@ -15,6 +15,7 @@ Nope. As of writing, I have only written a button parser and the start of an eve
 * ~~Launchpad MkII Specific Interface~~
 * ~~An event system for button presses~~
 * ~~Simple light feedback~~
+* Make MIDI wrapper functions
 * Generalize to all Launchpads
 * Advanced light feedback effects
 ### Instrument Mode / Scale Edit Mode
