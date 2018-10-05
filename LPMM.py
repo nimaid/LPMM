@@ -8,7 +8,7 @@ except ImportError:
     except ImportError:
         sys.exit("error loading lauchpad.py")
 
-import lp_events, lp_colors, lp_midi
+import lp_events, lp_colors, lp_midi, lp_instrument
 
 
 lp = launchpad.LaunchpadMk2();

@@ -21,12 +21,12 @@ def bind_button_to_note(x, y, note, velocity=127):
     lp_events.press_funcs[x][y] = lambda a,b: note_on(note, velocity)
     lp_events.release_funcs[x][y] = lambda a,b: note_off(note)
 
-OCT_BASE = [12, 24, 36, 48, 60, 72, 84, 96, 108]
+OCT_BASE = 12
 
 NOTE_OFFSETS = {"C":0, "Cs":1, "D":2, "Ds":3, "E":4, "F":5, "Fs":6, "G":7, "Gs":8, "A":9, "As":10, "B":11}
 
 def name_octave_to_note(name, octave):
-    return OCT_BASE[octave] + NOTE_OFFSETS[name]
+    return OCT_BASE + (octave * 12) + NOTE_OFFSETS[name]
 
 def bind_button_to_name_octave(x, y, name, octave, velocity=127):
     note_num = name_octave_to_note(name, octave)

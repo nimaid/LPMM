@@ -1,5 +1,5 @@
 import copy, threading, time
-import lp_colors
+import lp_colors, lp_instrument
 
 RUN_DELAY = 0.01
 
@@ -38,4 +38,4 @@ def start(lp_object):
     lp_colors.init(lp_object)
     init(lp_object)
     run(lp_object)
-
+    lp_instrument.update()

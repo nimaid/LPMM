@@ -1,3 +1,5 @@
+import lp_instrument
+
 BLACK = 0
 DARK_GREY = 1
 GREY = 2
