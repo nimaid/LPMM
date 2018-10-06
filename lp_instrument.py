@@ -14,13 +14,25 @@ mode = "THIRD" #
 base_note = None
 working_notes = None
 working_scale = None
+full_working_scale = None
 
 def init():
     global base_note
     global working_notes
     global working_scale
+    global full_working_scale
     base_note = lp_midi.name_octave_to_note(key, octave)
     working_scale = [scale[n]+base_note for n in range(len(scale))]
+
+    full_working_scale = []
+    for curr_oct in range(4):
+        for n in working_scale:
+            num = (curr_oct*12)+n
+            if len(full_working_scale) > 0:
+                if num != full_working_scale[-1]:
+                    full_working_scale.append(num)
+            else:
+                full_working_scale.append(num)
     
     working_notes = [[]]
     for x in range(8):
@@ -29,55 +41,18 @@ def init():
     for y in range(8, 0, -1):
         working_notes.append([])
         row = 8 - y
-        print("Row " + str(row))
-        row_offset = 0
-        for x in range(8):
-            offset = None
-            if mode == "SEQUENT":
-                offset = 8
-            elif mode == "THIRD":
-                offset = 2
+        
+        offset = None
+        if mode == "SEQUENT":
+            offset = 8
+        elif mode == "THIRD":
+            offset = 2
+
+        start_index = (row * offset)
             
-            scale_add = x + (row * offset)
-            print("  scale_add: " + str(scale_add))
-            if scale_add in range(8):
-                note = base_note + working_scale[scale_add]
-                working_notes[-1].append(note)
-                print("    Note: " + str(note))
-            elif scale_add > 7:
-                note = base_note
-                scale_add_offset = scale_add + row_offset
-                while (scale_add_offset // 8) > 0:
-                    print("    Remapping down: " + str(scale_add_offset), end="")
-                    note += 12
-                    scale_add_offset -= 8
-                    
-                    print(" -> " + str(scale_add_offset))
-                note += working_scale[scale_add_offset]
-                if len(working_notes[-1]) > 0:
-                    if note == working_notes[-1][-1]:
-                        print("    Nudging up: " + str(scale_add_offset), end="")
-                        row_offset += 1
-                        scale_add_offset += 1
-                        scale_add_offset %= 8
-                        print(" -> " + str(scale_add_offset))
-                        print("      row_offset: " + str(row_offset))
-                        note -= 24
-                        note += working_scale[scale_add_offset]
-                if (x == 0) and (len(working_notes[-2]) > 0):
-                    if False:
-                        print("    Nudging up: " + str(scale_add_offset), end="")
-                        row_offset += 1
-                        scale_add_offset += 1
-                        scale_add_offset %= 8
-                        print(" -> " + str(scale_add_offset))
-                        print("      row_offset: " + str(row_offset))
-                        note -= 24
-                        note += working_scale[scale_add_offset]
-                working_notes[-1].append(note)
-                print("    Note: " + str(note))
-            else:
-                None
+        for x in range(8):
+            note = full_working_scale[start_index + x]
+            working_notes[-1].append(note)
             
         working_notes[-1].append(None)
     working_notes.reverse()
