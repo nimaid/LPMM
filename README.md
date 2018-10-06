@@ -24,8 +24,12 @@ Sort of! It does work as a middleman, but with almost none of the features I wan
 * A key and octave selector
 * Octave up and down buttons
 * Many scales and a scale selector
-* Alternate scale interval layouts and selector
-* Drum Rack Mode
+* ~~Diatonic scale modes system~~
+* All diatonic scale modes
+* Chromatic scale mode system
+* All chromatic scale modes
+* Drum rack scale mode
+* Scale mode selector
 * Relative scale, 5th left, and 5th right buttons
 * Quick Scale Mode
 * Remaining minor Scale Edit Mode Features
