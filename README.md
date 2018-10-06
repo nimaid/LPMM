@@ -23,7 +23,9 @@ Sort of! It does work as a middleman, but with almost none of the features I wan
 * ~~A basic major scale~~
 * A key and octave selector
 * Octave up and down buttons
-* Many scales and a scale selector
+* ~~A dynamic scale system~~
+* All scales 
+* scale selector
 * ~~Diatonic scale modes system~~
 * All diatonic scale modes
 * Chromatic scale mode system
