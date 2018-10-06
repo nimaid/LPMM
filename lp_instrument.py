@@ -9,7 +9,7 @@ SCALE_MINOR = [0, 2, 3, 5, 7, 8, 10, 12]
 
 scale = SCALE_MAJOR
 key = "C"
-octave = 1 #0-3
+octave = 2
 mode = "FOURTH"
 
 base_note = None
