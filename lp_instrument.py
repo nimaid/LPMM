@@ -6,6 +6,16 @@ DEFAULT_COLOR = lp_colors.WHITE
 
 SCALE_MAJOR = [0, 2, 4, 5, 7, 9, 11, 12]
 SCALE_MINOR = [0, 2, 3, 5, 7, 8, 10, 12]
+SCALE_DORIAN = [0, 2, 3, 5, 7, 9, 10, 12]
+SCALE_MIXOLYDIAN = [0, 2, 4, 5, 7, 9, 10, 12]
+SCALE_LYDIAN = [0, 2, 4, 6, 7, 9, 11, 12]
+SCALE_PHRYGIAN = [0, 1, 3, 5, 7, 8, 10, 12]
+SCALE_LOCARIAN = [0, 1, 3, 5, 6, 8, 10, 12]
+#SCALE_DIMINISHED = [0, 2,3, 5, 6, 8, 9, 11]
+#SCALE_WHOLEHALF = ??? 
+#SCALE_WHOLETONE = [0, 2, 4, 6, 8, 10, 12, 14]
+#SCALE_MINORBLUES = [0, 3, 5, 6, 7, 10, 12, 15]
+
 
 scale = SCALE_MAJOR
 key = "C"
