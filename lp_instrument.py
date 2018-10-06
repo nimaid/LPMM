@@ -9,7 +9,7 @@ SCALE_MAJOR = [0, 2, 4, 5, 7, 9, 11, 12]
 scale = SCALE_MAJOR
 key = "C"
 octave = 1 #0-3
-mode = "THIRD" #
+mode = "THIRD"
 
 base_note = None
 working_notes = None
@@ -47,6 +47,8 @@ def init():
             offset = 8
         elif mode == "THIRD":
             offset = 2
+        elif mode == "FOURTH":
+            offset = 3
 
         start_index = (row * offset)
             
@@ -56,6 +58,14 @@ def init():
             
         working_notes[-1].append(None)
     working_notes.reverse()
+
+    if mode == "THIRD":
+        #Launchpad95 essentiallt swaps X and Y for this...
+        working_notes = [list(n) for n in list(zip(*working_notes))]
+        working_notes.reverse()
+        for n in range(8):
+            working_notes[n].reverse()
+            working_notes[n] = working_notes[n][1:]+working_notes[n][:1]
 
 def get_keys_bound_to_same_note_as(x, y):
     note = working_notes[y][x]

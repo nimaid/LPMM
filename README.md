@@ -27,7 +27,7 @@ Sort of! It does work as a middleman, but with almost none of the features I wan
 * All scales 
 * scale selector
 * ~~Diatonic scale modes system~~
-* All diatonic scale modes
+* ~~All diatonic scale modes~~
 * Chromatic scale mode system
 * All chromatic scale modes
 * Drum rack scale mode
