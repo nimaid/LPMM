@@ -99,6 +99,8 @@ def octave_up():
     global octave
     if octave < 7:
         octave += 1
+    if mode == "SEQUENT":
+        octave = min(octave, 2)
     update()
 
 def octave_down():
@@ -110,16 +112,21 @@ def octave_down():
 def octave_set(oct_in):
     global octave
     octave = min(max(oct_in, -1), 7)
+    if mode == "SEQUENT":
+        octave = min(octave, 2)
     update()
 
 def key_set(key_in):
     global key
     key = key_in
     update()
-    
+
 def mode_set(mode_in):
     global mode
+    global octave
     mode = mode_in
+    if mode == "SEQUENT":
+        octave = min(octave, 2)
     update()
 
 def scale_set(scale_in):
