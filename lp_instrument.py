@@ -5,11 +5,12 @@ SCALE_COLOR = lp_colors.LIGHT_BLUE
 DEFAULT_COLOR = lp_colors.WHITE
 
 SCALE_MAJOR = [0, 2, 4, 5, 7, 9, 11, 12]
+SCALE_MINOR = [0, 2, 3, 5, 7, 8, 10, 12]
 
 scale = SCALE_MAJOR
 key = "C"
 octave = 1 #0-3
-mode = "THIRD"
+mode = "FOURTH"
 
 base_note = None
 working_notes = None
@@ -25,7 +26,7 @@ def init():
     working_scale = [scale[n]+base_note for n in range(len(scale))]
 
     full_working_scale = []
-    for curr_oct in range(4):
+    for curr_oct in range(9):
         for n in working_scale:
             num = (curr_oct*12)+n
             if len(full_working_scale) > 0:
@@ -44,11 +45,14 @@ def init():
         
         offset = None
         if mode == "SEQUENT":
-            offset = 8
+            offset = 7
         elif mode == "THIRD":
             offset = 2
         elif mode == "FOURTH":
             offset = 3
+        else:
+            print("Not a valid mode: " + mode)
+            print("Shit is gonna start breaking now...")
 
         start_index = (row * offset)
             
@@ -60,7 +64,7 @@ def init():
     working_notes.reverse()
 
     if mode == "THIRD":
-        #Launchpad95 essentiallt swaps X and Y for this...
+        #Launchpad95 essentially swaps X and Y for this...
         working_notes = [list(n) for n in list(zip(*working_notes))]
         working_notes.reverse()
         for n in range(8):
@@ -91,14 +95,34 @@ def update():
             else:
                 lp_colors.setXY(x, y, DEFAULT_COLOR)
 
-def octave_up(x = None, y = None):
+def octave_up():
     global octave
-    if octave < 3:
+    if octave < 7:
         octave += 1
     update()
 
-def octave_down(x = None, y = None):
+def octave_down():
     global octave
-    if octave > 0:
+    if octave > -1:
         octave -= 1
+    update()
+
+def octave_set(oct_in):
+    global octave
+    octave = min(max(oct_in, -1), 7)
+    update()
+
+def key_set(key_in):
+    global key
+    key = key_in
+    update()
+    
+def mode_set(mode_in):
+    global mode
+    mode = mode_in
+    update()
+
+def scale_set(scale_in):
+    global scale
+    scale = scale_in
     update()
