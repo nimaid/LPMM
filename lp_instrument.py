@@ -4,17 +4,17 @@ ROOT_COLOR = lp_colors.BLUE
 SCALE_COLOR = lp_colors.LIGHT_BLUE
 DEFAULT_COLOR = lp_colors.WHITE
 
-SCALE_MAJOR = [0, 2, 4, 5, 7, 9, 11, 12]
-SCALE_MINOR = [0, 2, 3, 5, 7, 8, 10, 12]
-SCALE_DORIAN = [0, 2, 3, 5, 7, 9, 10, 12]
-SCALE_MIXOLYDIAN = [0, 2, 4, 5, 7, 9, 10, 12]
-SCALE_LYDIAN = [0, 2, 4, 6, 7, 9, 11, 12]
-SCALE_PHRYGIAN = [0, 1, 3, 5, 7, 8, 10, 12]
-SCALE_LOCARIAN = [0, 1, 3, 5, 6, 8, 10, 12]
-#SCALE_DIMINISHED = [0, 2,3, 5, 6, 8, 9, 11]
+SCALE_MAJOR = [0, 2, 4, 5, 7, 9, 11]
+SCALE_MINOR = [0, 2, 3, 5, 7, 8, 10]
+SCALE_DORIAN = [0, 2, 3, 5, 7, 9, 10]
+SCALE_MIXOLYDIAN = [0, 2, 4, 5, 7, 9, 10]
+SCALE_LYDIAN = [0, 2, 4, 6, 7, 9, 11]
+SCALE_PHRYGIAN = [0, 1, 3, 5, 7, 8, 10]
+SCALE_LOCARIAN = [0, 1, 3, 5, 6, 8, 10]
+SCALE_DIMINISHED = [0, 2,3, 5, 6, 8, 9, 11]
 #SCALE_WHOLEHALF = ??? 
-#SCALE_WHOLETONE = [0, 2, 4, 6, 8, 10, 12, 14]
-#SCALE_MINORBLUES = [0, 3, 5, 6, 7, 10, 12, 15]
+SCALE_WHOLETONE = [0, 2, 4, 6, 8, 10]
+SCALE_MINORBLUES = [0, 3, 5, 6, 7, 10]
 
 
 scale = SCALE_MAJOR
@@ -36,14 +36,10 @@ def init():
     working_scale = [scale[n]+base_note for n in range(len(scale))]
 
     full_working_scale = []
-    for curr_oct in range(9):
+    for curr_oct in range(12):
         for n in working_scale:
             num = (curr_oct*12)+n
-            if len(full_working_scale) > 0:
-                if num != full_working_scale[-1]:
-                    full_working_scale.append(num)
-            else:
-                full_working_scale.append(num)
+            full_working_scale.append(num)
     
     working_notes = [[]]
     for x in range(8):
@@ -54,17 +50,16 @@ def init():
         row = 8 - y
         
         offset = None
-        if mode == "SEQUENT":
-            offset = 7
-        elif mode == "THIRD":
+        if mode == "THIRD":
             offset = 2
         elif mode == "FOURTH":
             offset = 3
+        
+        start_index = None
+        if mode == "SEQUENT":
+            start_index = len(scale) * row#???
         else:
-            print("Not a valid mode: " + mode)
-            print("Shit is gonna start breaking now...")
-
-        start_index = (row * offset)
+            start_index = (row * offset)
             
         for x in range(8):
             note = full_working_scale[start_index + x]

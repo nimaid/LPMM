@@ -6,7 +6,7 @@ except ImportError:
     try:
         import launchpad
     except ImportError:
-        sys.exit("error loading lauchpad.py")
+        sys.exit("error loading launchpad.py")
 
 import lp_events, lp_colors, lp_midi, lp_instrument
 
