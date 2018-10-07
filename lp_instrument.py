@@ -31,10 +31,10 @@ SCALE_PELOG = [0, 1, 3, 4, 7, 8] #VERIFIED
 SCALE_SPANISH = [0, 1, 3, 4, 5, 6, 8, 10] #VERIFIED
 SCALE_IONEOL = [0, 2, 3, 4, 5, 7, 8, 9, 10, 11] #VERIFIED
 
-scale = SCALE_MAJOR
-key = "C"
-octave = 2
-mode = "FOURTH"
+scale = SCALE_MAJOR #VERIFIED DEFAULT
+key = "C" #VERIFIED DEFAULT
+octave = 1 #VERIFIED DEFAULT
+mode = "FOURTH" #VERIFIED DEFAULT
 
 base_note = None
 working_notes = None
@@ -46,7 +46,7 @@ def init():
     global working_notes
     global working_scale
     global full_working_scale
-    base_note = lp_midi.name_octave_to_note(key, octave)
+    base_note = lp_midi.name_octave_to_note(key, octave + 1)
     working_scale = [scale[n]+base_note for n in range(len(scale))]
 
     full_working_scale = []
@@ -116,23 +116,23 @@ def update():
 
 def octave_up():
     global octave
-    if octave < 7:
+    if octave < 6:
         octave += 1
     if mode == "SEQUENT":
-        octave = min(octave, 2)
+        octave = min(octave, 1)
     update()
 
 def octave_down():
     global octave
-    if octave > -1:
+    if octave > -2:
         octave -= 1
     update()
 
 def octave_set(oct_in):
     global octave
-    octave = min(max(oct_in, -1), 7)
+    octave = min(max(oct_in, -2), 6)
     if mode == "SEQUENT":
-        octave = min(octave, 2)
+        octave = min(octave, 1)
     update()
 
 def key_set(key_in):
@@ -145,7 +145,7 @@ def mode_set(mode_in):
     global octave
     mode = mode_in
     if mode == "SEQUENT":
-        octave = min(octave, 2)
+        octave = min(octave, 1)
     update()
 
 def scale_set(scale_in):
