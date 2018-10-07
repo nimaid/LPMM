@@ -10,12 +10,27 @@ SCALE_DORIAN = [0, 2, 3, 5, 7, 9, 10]
 SCALE_MIXOLYDIAN = [0, 2, 4, 5, 7, 9, 10]
 SCALE_LYDIAN = [0, 2, 4, 6, 7, 9, 11]
 SCALE_PHRYGIAN = [0, 1, 3, 5, 7, 8, 10]
-SCALE_LOCARIAN = [0, 1, 3, 5, 6, 8, 10]
+SCALE_LOCRIAN = [0, 1, 3, 5, 6, 8, 10]
 SCALE_DIMINISHED = [0, 2,3, 5, 6, 8, 9, 11]
-#SCALE_WHOLEHALF = ??? 
+#SCALE_WHOLEHALF = ??? Whhole-Half is == Diminished accorking to the internet...
+# must look into the Launchpad95 scrips code
 SCALE_WHOLETONE = [0, 2, 4, 6, 8, 10]
 SCALE_MINORBLUES = [0, 3, 5, 6, 7, 10]
-
+SCALE_MINORPENTATONIC = [0, 3, 5, 7, 10]
+SCALE_MAJORPENTATONIC = [0, 2, 4, 7, 9]
+SCALE_HARMONICMINOR = [0, 2, 3, 5, 7, 8, 11]
+SCALE_MELODICMINOR = [0, 2, 3, 5, 7, 9, 11] # Ascending or descedning? Must cross check.
+SCALE_SUPERLOCRIAN = [0, 1, 3, 4, 6, 8, 10]
+SCALE_BHIRAV = [0, 1, 4, 5, 7, 8, 11]
+SCALE_HUNGARIANMINOR = [0, 2, 3, 6, 7, 8, 11]
+#SCALE_MINORGYPSY = [0, 1, 4, 5, 7, 8, 11] # Is this Double harmonic? Bhirav too? WOT
+SCALE_HIRAJOSHI = [0, 2, 3, 7, 8]
+SCALE_INSEN = [0, 1, 5, 7, 10]
+SCALE_IWATO = [0, 1, 5, 6, 10]
+SCALE_KUMOI = [0, 2, 3, 7, 9]
+SCALE_PELOG = [0, 1, 3, 7, 8]
+SCALE_SPANISH = [0, 1, 4, 5, 7, 8, 10]
+#SCALE_IONEOL = [] #WOT???
 
 scale = SCALE_MAJOR
 key = "C"
