@@ -8,7 +8,7 @@ The goal of this project is to implement a standalone version of the Ableton Liv
 Because Ableton is an expensive software, and I want to use the fantastically inspiring Launchpad95 script in any MIDI-enabled program. This opens the door for using a Launchpad as a serious production and performance tool in open source software, which is part of a larger effort I am making to find/make alternatives for my Windows-only programs that I simply can't live without.
 
 ## Does it work yet?
-Sort of! It does work as a middleman, but with almost none of the features I want. See below for a todo list. I have a life (a crazy one at that), so no promises on a delivery date. Feel free to offer your help!
+Sort of! It does work as a middleman, but with only a few of the features I want. See below for a todo list. I have a life (a crazy one at that), so no promises on a delivery date. Feel free to offer your help!
 
 ## What still needs to be written?
 ### Global
@@ -24,8 +24,8 @@ Sort of! It does work as a middleman, but with almost none of the features I wan
 * A key and octave selector
 * Octave up and down buttons
 * ~~A dynamic scale system~~
-* All scales 
-* scale selector
+* ~~All scales~~
+* Scale selector
 * ~~Diatonic scale modes system~~
 * ~~All diatonic scale modes~~
 * Chromatic scale mode system
