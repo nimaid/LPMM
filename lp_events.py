@@ -19,7 +19,6 @@ def init(lp_object):
     global timer
     timer = threading.Timer(RUN_DELAY, run, [lp_object])
 
-
 def run(lp_object):
     global timer
     while True:
@@ -62,3 +61,13 @@ def start(lp_object):
     init(lp_object)
     run(lp_object)
     lp_instrument.update()
+    lp_instrument.bind_function_keys()
+
+def bind_func_with_colors(x, y, func, off_color, on_color = lp_colors.GREEN, release_func = None):
+    global press_funcs
+    if release_func == None:
+        release_func = lambda x, y : None
+    press_funcs[x][y] = func
+    release_funcs[x][y] = release_func
+    lp_colors.setXY(x, y, off_color)
+    lp_colors.effect_colors[x][y] = on_color

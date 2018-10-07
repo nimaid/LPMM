@@ -1,4 +1,4 @@
-import lp_midi, lp_colors
+import lp_events, lp_midi, lp_colors
 
 ROOT_COLOR = lp_colors.BLUE
 SCALE_COLOR = lp_colors.LIGHT_BLUE
@@ -71,7 +71,7 @@ def init():
         
         start_index = None
         if mode == "SEQUENT":
-            start_index = len(scale) * row#???
+            start_index = len(scale) * row
         else:
             start_index = (row * offset)
             
@@ -98,21 +98,6 @@ def get_keys_bound_to_same_note_as(x, y):
             if working_notes[b][a] == note:
                 same_note.append((a, b))
     return same_note
-
-def update():
-    init()
-    
-    for y in range(1, 9):
-        for x in range(8):
-            note = working_notes[y-1][x]
-            lp_midi.bind_button_to_note(x, y, note)
-            
-            if note % 12 == base_note % 12:
-                lp_colors.setXY(x, y, ROOT_COLOR)
-            elif note % 12 in [n%12 for n in working_scale]:
-                lp_colors.setXY(x, y, SCALE_COLOR)
-            else:
-                lp_colors.setXY(x, y, DEFAULT_COLOR)
 
 def octave_up():
     global octave
@@ -152,3 +137,25 @@ def scale_set(scale_in):
     global scale
     scale = scale_in
     update()
+
+def bind_function_keys():
+    oct_up_bindable = lambda x, y : octave_up()
+    lp_events.bind_func_with_colors(8, 3, oct_up_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER)
+    oct_down_bindable = lambda x, y : octave_down()
+    lp_events.bind_func_with_colors(8, 4, oct_down_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER)
+
+def update():
+    
+    init()
+    
+    for y in range(1, 9):
+        for x in range(8):
+            note = working_notes[y-1][x]
+            lp_midi.bind_button_to_note(x, y, note)
+            
+            if note % 12 == base_note % 12:
+                lp_colors.setXY(x, y, ROOT_COLOR)
+            elif note % 12 in [n%12 for n in working_scale]:
+                lp_colors.setXY(x, y, SCALE_COLOR)
+            else:
+                lp_colors.setXY(x, y, DEFAULT_COLOR)
