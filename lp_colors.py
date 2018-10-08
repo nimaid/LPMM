@@ -73,7 +73,7 @@ def update():
             for y in range(1, 9):
                 set_color = None
                 if lp_instrument.working_notes[y-1][x] in lp_midi.curr_notes:
-                    set_color = lp_instrument.ACTIVE_COLOR
+                    set_color = lp_instrument.COLOR_EFFECT
                 else:
                     set_color = curr_colors[x][y]
                 lp_object.LedCtrlXYByCode(x, y, set_color)

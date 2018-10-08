@@ -6,10 +6,11 @@ except ImportError:
     try:
         import launchpad
     except ImportError:
-        sys.exit("error loading launchpad.py")
+        sys.exit("[launchpad_py] Error loading launchpad.py")
 
 import lp_events, lp_colors, lp_midi, lp_instrument
 
+# print("[LPMM] \n>>> ", end = "")
 
 lp = launchpad.LaunchpadMk2();
 
@@ -19,9 +20,9 @@ def init():
 
 def main():
     if lp.Open(0, "mk2"):
-        print("Connected to Launchpad Mk2!")
+        print("[LPMM] Connected to Launchpad Mk2!\n>>> ", end = "")
     else:
-        print("Could not connect to Launchpad Mk2, exiting...")
+        print("[LPMM] Could not connect to Launchpad Mk2, exiting...")
         return
     
     init()

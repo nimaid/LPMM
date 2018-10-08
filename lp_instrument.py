@@ -1,10 +1,10 @@
 import copy
 import lp_events, lp_midi, lp_colors
 
-ROOT_COLOR = lp_colors.BLUE
-SCALE_COLOR = lp_colors.LIGHT_BLUE
-DEFAULT_COLOR = lp_colors.WHITE
-ACTIVE_COLOR = lp_colors.GREEN
+COLOR_ROOT = lp_colors.BLUE
+COLOR_SCALE = lp_colors.LIGHT_BLUE
+COLOR_DEFAULT = lp_colors.WHITE
+COLOR_EFFECT = lp_colors.GREEN
 
 SCALE_MAJOR = [0, 2, 4, 5, 7, 9, 11] #VERIFIED
 SCALE_MINOR = [0, 2, 3, 5, 7, 8, 10] #VERIFIED
@@ -109,7 +109,9 @@ def off_note_and_rebind_new_note(x, y, old_note, new_note):
 
 def update():
     global old_working_notes
-    old_working_notes = copy.deepcopy(working_notes)
+    old_working_notes = copy.deepcopy(working_notes) #want to not update on multiple octave press for specific...
+    #maybe should be backing up a buttons original note WHEN pressed, and always turn that off
+    #like a note_when_pressed array, each entry is updated SEPERATELY
     
     init()
     
@@ -118,27 +120,29 @@ def update():
             note = working_notes[y-1][x]
             
             if note % 12 == base_note % 12:
-                lp_colors.setXY(x, y, ROOT_COLOR)
+                lp_colors.setXY(x, y, COLOR_ROOT)
             elif note % 12 in [n%12 for n in working_scale]:
-                lp_colors.setXY(x, y, SCALE_COLOR)
+                lp_colors.setXY(x, y, COLOR_SCALE)
             else:
-                lp_colors.setXY(x, y, DEFAULT_COLOR)
+                lp_colors.setXY(x, y, COLOR_DEFAULT)
 
             if lp_events.pressed[x][y]:
                 old_note = old_working_notes[y-1][x]
                 new_note = note #lambda uses pointers or something so I have to do this
+                #print("test") #if hold while muti octave, sets the note off wrong
                 lp_events.release_funcs[x][y] = lambda a, b : off_note_and_rebind_new_note(a, b, old_note, new_note)
             else:
                 lp_midi.bind_button_to_note(x, y, note)
 
 def octave_up():
     global octave
-    if octave < 6:
+    if octave < 5:
         octave += 1
     if mode == "SEQUENT":
         octave = min(octave, 1)
     update()
     lp_colors.update()
+    print("[LPMM] OCTAVE UP, NOW " + str(octave) + "\n>>> ", end = "")
 
 def octave_down():
     global octave
@@ -146,10 +150,11 @@ def octave_down():
         octave -= 1
     update()
     lp_colors.update()
+    print("[LPMM] OCTAVE DOWN, NOW " + str(octave) + "\n>>> ", end = "")
 
 def octave_set(oct_in):
     global octave
-    octave = min(max(oct_in, -2), 6)
+    octave = min(max(oct_in, -2), 5)
     if mode == "SEQUENT":
         octave = min(octave, 1)
     update()
