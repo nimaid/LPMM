@@ -33,16 +33,17 @@ PURPLE_THIRD = 50
 curr_colors = [[BLACK for y in range(9)] for x in range(9)]
 effect_colors = [[GREEN for y in range(9)] for x in range(9)]
 
+import lp_events
+
 lp_object = None
 
 def init(lp_object_in):
     global lp_object
     lp_object = lp_object_in
-    lp_object.LedAllOn(BLACK)
+                
 
 def setXY(x, y, color):
     curr_colors[x][y] = color
-    lp_object.LedCtrlXYByCode(x, y, color)
 
 def effectXY(x, y, color):
     effect_colors[x][y] = color
@@ -50,11 +51,31 @@ def effectXY(x, y, color):
 def getXY(x, y):
     return curr_colors[x][y]
 
-def on_effect(x, y):
-    new_color = effect_colors[x][y]
-    lp_object.LedCtrlXYByCode(x, y, new_color)
+def update():
+    for x in range(8): #top funcs
+        set_color = None
+        if lp_events.pressed[x][0]:
+            set_color = effect_colors[x][0]
+        else:
+            set_color = curr_colors[x][0]
+        lp_object.LedCtrlXYByCode(x, 0, set_color)
 
-def off_effect(x, y):
-    old_color = getXY(x, y)
-    lp_object.LedCtrlXYByCode(x, y, old_color)
+    for y in range(1, 9):
+        set_color = None
+        if lp_events.pressed[8][y]:
+            set_color = effect_colors[8][y]
+        else:
+            set_color = curr_colors[8][y]
+        lp_object.LedCtrlXYByCode(8, y, set_color)
 
+    for x in range(8):
+        for y in range(1, 9):
+            set_color = None
+            if lp_events.pressed[x][y]:
+                set_color = effect_colors[x][y]
+##                if lp_events.mode == "INSTRUMENT":
+##                    if lp_instrument.working_notes[x][y] in lp_midi.curr_notes:
+##                        set_color = lp_instrument.ACTIVE
+            else:
+                set_color = curr_colors[x][y]
+            lp_object.LedCtrlXYByCode(x, y, set_color)

@@ -3,6 +3,7 @@ import lp_events, lp_midi, lp_colors
 ROOT_COLOR = lp_colors.BLUE
 SCALE_COLOR = lp_colors.LIGHT_BLUE
 DEFAULT_COLOR = lp_colors.WHITE
+ACTIVE_COLOR = lp_colors.GREEN
 
 SCALE_MAJOR = [0, 2, 4, 5, 7, 9, 11] #VERIFIED
 SCALE_MINOR = [0, 2, 3, 5, 7, 8, 10] #VERIFIED
@@ -99,6 +100,30 @@ def get_keys_bound_to_same_note_as(x, y):
                 same_note.append((a, b))
     return same_note
 
+def get_keys_bound_to_note(note):
+    same_note = []
+    for a in range(8):
+        for b in range(8):
+            if working_notes[b][a] == note:
+                same_note.append((a, b))
+    return same_note
+
+def update():
+    
+    init()
+    
+    for y in range(1, 9):
+        for x in range(8):
+            note = working_notes[y-1][x]
+            lp_midi.bind_button_to_note(x, y, note)
+            
+            if note % 12 == base_note % 12:
+                lp_colors.setXY(x, y, ROOT_COLOR)
+            elif note % 12 in [n%12 for n in working_scale]:
+                lp_colors.setXY(x, y, SCALE_COLOR)
+            else:
+                lp_colors.setXY(x, y, DEFAULT_COLOR)
+
 def octave_up():
     global octave
     if octave < 6:
@@ -143,19 +168,3 @@ def bind_function_keys():
     lp_events.bind_func_with_colors(8, 3, oct_up_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER)
     oct_down_bindable = lambda x, y : octave_down()
     lp_events.bind_func_with_colors(8, 4, oct_down_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER)
-
-def update():
-    
-    init()
-    
-    for y in range(1, 9):
-        for x in range(8):
-            note = working_notes[y-1][x]
-            lp_midi.bind_button_to_note(x, y, note)
-            
-            if note % 12 == base_note % 12:
-                lp_colors.setXY(x, y, ROOT_COLOR)
-            elif note % 12 in [n%12 for n in working_scale]:
-                lp_colors.setXY(x, y, SCALE_COLOR)
-            else:
-                lp_colors.setXY(x, y, DEFAULT_COLOR)
