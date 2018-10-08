@@ -40,5 +40,7 @@ Sort of! It does work as a middleman, but with only a few of the features I want
 * TBD
 ### Device Controller Mode
 * TBD
+### User Modes
+* TBD
 ### Other
 * TBD
