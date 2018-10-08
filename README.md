@@ -21,8 +21,9 @@ Sort of! It does work as a middleman, but with only a few of the features I want
 * Advanced light feedback effects
 ### Instrument Mode / Scale Edit Mode
 * ~~A basic major scale~~
-* A key and octave selector
-* Octave up and down buttons
+* A key selector
+* An octave selector
+* ~~Octave up and down buttons~~
 * ~~A dynamic scale system~~
 * ~~All scales~~
 * Scale selector

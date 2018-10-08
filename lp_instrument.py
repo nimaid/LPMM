@@ -43,6 +43,8 @@ working_notes = None
 working_scale = None
 full_working_scale = None
 
+old_working_notes = None
+
 def init():
     global base_note
     global working_notes
@@ -101,12 +103,12 @@ def get_keys_bound_to_note(note):
     return same_note
 
 def off_note_and_rebind_new_note(x, y, old_note, new_note):
-    print("Rebinding (" + str(x) + ", " + str(y)+ ") from " + str(old_note) + " to " + str(new_note))
     lp_midi.note_off(old_note)
     lp_colors.update()
     lp_midi.bind_button_to_note(x, y, new_note)
 
 def update():
+    global old_working_notes
     old_working_notes = copy.deepcopy(working_notes)
     
     init()
@@ -124,8 +126,8 @@ def update():
 
             if lp_events.pressed[x][y]:
                 old_note = old_working_notes[y-1][x]
-                note = working_notes[y-1][x]
-                lp_events.release_funcs[x][y] = lambda x, y : off_note_and_rebind_new_note(x, y, old_note, note)
+                new_note = note #lambda uses pointers or something so I have to do this
+                lp_events.release_funcs[x][y] = lambda a, b : off_note_and_rebind_new_note(a, b, old_note, new_note)
             else:
                 lp_midi.bind_button_to_note(x, y, note)
 
