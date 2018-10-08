@@ -33,7 +33,6 @@ def run(lp_object):
                 pressed[event[0]][event[1]] = True
                 press_funcs[event[0]][event[1]](event[0], event[1])
         else:
-            lp_colors.update()
             break
     init(lp_object)
     timer.start()

@@ -131,12 +131,14 @@ def octave_up():
     if mode == "SEQUENT":
         octave = min(octave, 1)
     update()
+    lp_colors.update()
 
 def octave_down():
     global octave
     if octave > -2:
         octave -= 1
     update()
+    lp_colors.update()
 
 def octave_set(oct_in):
     global octave
@@ -144,11 +146,13 @@ def octave_set(oct_in):
     if mode == "SEQUENT":
         octave = min(octave, 1)
     update()
+    lp_colors.update()
 
 def key_set(key_in):
     global key
     key = key_in
     update()
+    lp_colors.update()
 
 def mode_set(mode_in):
     global mode
@@ -157,14 +161,17 @@ def mode_set(mode_in):
     if mode == "SEQUENT":
         octave = min(octave, 1)
     update()
+    lp_colors.update()
 
 def scale_set(scale_in):
     global scale
     scale = scale_in
     update()
+    lp_colors.update()
 
 def bind_function_keys():
     oct_up_bindable = lambda x, y : octave_up()
-    lp_events.bind_func_with_colors(8, 3, oct_up_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER)
+    colors_update_bindable = lambda x, y : lp_colors.update()
+    lp_events.bind_func_with_colors(8, 3, oct_up_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER, colors_update_bindable)
     oct_down_bindable = lambda x, y : octave_down()
-    lp_events.bind_func_with_colors(8, 4, oct_down_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER)
+    lp_events.bind_func_with_colors(8, 4, oct_down_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER, colors_update_bindable)

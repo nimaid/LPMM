@@ -1,5 +1,5 @@
 import pygame
-import lp_events
+import lp_events, lp_colors
 
 curr_notes = set()
 
@@ -13,10 +13,12 @@ print("MIDI Output going to "+str(output_info[0])[2:-1]+" : "+str(output_info[1]
 def note_on(note, velocity=127):
     player.note_on(note, velocity)
     curr_notes.add(note)
+    lp_colors.update()
 
 def note_off(note):
     player.note_off(note)
     curr_notes.discard(note)
+    lp_colors.update()
 
 def bind_button_to_note(x, y, note, velocity=127):
     lp_events.press_funcs[x][y] = lambda a,b: note_on(note, velocity)
