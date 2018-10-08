@@ -123,11 +123,7 @@ def update():
 
             if lp_events.pressed[x][y]:
                 prev_note = lp_midi.note_when_pressed[x][y]
-                print("X: " + str(x) + ", Y: " + str(y) + ", prev_note: " + str(prev_note))
-                #new_note = note #lambda uses pointers or something so I have to do this
-                #the lambda func always calls the LATEST old_note value
-                #lp_events.release_funcs[x][y] = lambda a, b : off_note_and_rebind_new_note(a, b, old_note, new_note)
-                lp_events.release_funcs[x][y] = functools.partial(off_note_and_rebind_new_note, old_note=prev_note, new_note = note)
+                lp_events.release_funcs[x][y] = functools.partial(off_note_and_rebind_new_note, old_note=prev_note, new_note=note)
             else:
                 lp_midi.bind_button_to_note(x, y, note)
 
