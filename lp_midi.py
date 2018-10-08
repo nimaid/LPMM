@@ -1,7 +1,8 @@
 import pygame
-import lp_events, lp_colors
+import lp_events, lp_colors, lp_instrument
 
 curr_notes = set()
+note_when_pressed = [[None for y in range(9)] for x in range(9)]
 
 pygame.midi.init()
 
@@ -10,21 +11,25 @@ output_info = pygame.midi.get_device_info(output_ID)
 player = pygame.midi.Output(output_ID)
 print("MIDI Output going to "+str(output_info[0])[2:-1]+" : "+str(output_info[1])[2:-1])
 
-def note_on(note, velocity=127):
+def note_on(x, y, note, velocity=127):
+    global note_when_pressed
     player.note_on(note, velocity)
     curr_notes.add(note)
+    note_when_pressed[x][y] = note
     lp_colors.update()
     print("[LPMM] NOTE " + str(note) + " ON, VELOCITY " + str(velocity) + "\n>>> ", end = "")
 
-def note_off(note):
+def note_off(x, y, note):
+    global note_when_pressed
     player.note_off(note)
     curr_notes.discard(note)
+    note_when_pressed[x][y] = None
     lp_colors.update()
     print("[LPMM] NOTE " + str(note) + " OFF\n>>> ", end = "")
 
 def bind_button_to_note(x, y, note, velocity=127):
-    lp_events.press_funcs[x][y] = lambda a,b: note_on(note, velocity)
-    lp_events.release_funcs[x][y] = lambda a,b: note_off(note)
+    lp_events.press_funcs[x][y] = lambda a,b: note_on(a, b, note, velocity)
+    lp_events.release_funcs[x][y] = lambda a,b: note_off(a, b, note)
 
 
 OCT_BASE = 12
