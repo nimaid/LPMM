@@ -14,11 +14,13 @@ def note_on(note, velocity=127):
     player.note_on(note, velocity)
     curr_notes.add(note)
     lp_colors.update()
+    print("[LPMM] NOTE " + str(note) + " ON, VELOCITY " + str(velocity) + "\n>>> ", end = "")
 
 def note_off(note):
     player.note_off(note)
     curr_notes.discard(note)
     lp_colors.update()
+    print("[LPMM] NOTE " + str(note) + " OFF\n>>> ", end = "")
 
 def bind_button_to_note(x, y, note, velocity=127):
     lp_events.press_funcs[x][y] = lambda a,b: note_on(note, velocity)
