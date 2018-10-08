@@ -1,3 +1,4 @@
+import copy
 import lp_events, lp_midi, lp_colors
 
 ROOT_COLOR = lp_colors.BLUE
@@ -91,15 +92,6 @@ def init():
             working_notes[n].reverse()
             working_notes[n] = working_notes[n][1:]+working_notes[n][:1]
 
-def get_keys_bound_to_same_note_as(x, y):
-    note = working_notes[y][x]
-    same_note = []
-    for a in range(8):
-        for b in range(8):
-            if working_notes[b][a] == note:
-                same_note.append((a, b))
-    return same_note
-
 def get_keys_bound_to_note(note):
     same_note = []
     for a in range(8):
@@ -108,14 +100,20 @@ def get_keys_bound_to_note(note):
                 same_note.append((a, b))
     return same_note
 
+def off_note_and_rebind_new_note(x, y, old_note, new_note):
+    print("Rebinding (" + str(x) + ", " + str(y)+ ") from " + str(old_note) + " to " + str(new_note))
+    lp_midi.note_off(old_note)
+    lp_colors.update()
+    lp_midi.bind_button_to_note(x, y, new_note)
+
 def update():
+    old_working_notes = copy.deepcopy(working_notes)
     
     init()
     
     for y in range(1, 9):
         for x in range(8):
             note = working_notes[y-1][x]
-            lp_midi.bind_button_to_note(x, y, note)
             
             if note % 12 == base_note % 12:
                 lp_colors.setXY(x, y, ROOT_COLOR)
@@ -123,6 +121,13 @@ def update():
                 lp_colors.setXY(x, y, SCALE_COLOR)
             else:
                 lp_colors.setXY(x, y, DEFAULT_COLOR)
+
+            if lp_events.pressed[x][y]:
+                old_note = old_working_notes[y-1][x]
+                note = working_notes[y-1][x]
+                lp_events.release_funcs[x][y] = lambda x, y : off_note_and_rebind_new_note(x, y, old_note, note)
+            else:
+                lp_midi.bind_button_to_note(x, y, note)
 
 def octave_up():
     global octave
