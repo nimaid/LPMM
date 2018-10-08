@@ -48,7 +48,7 @@ def start(lp_object):
 def bind_func_with_colors(x, y, func, off_color, on_color = lp_colors.GREEN, release_func = None):
     global press_funcs
     if release_func == None:
-        release_func = lambda x, y : None
+        release_func = lambda a, b : None
     press_funcs[x][y] = func
     release_funcs[x][y] = release_func
     lp_colors.setXY(x, y, off_color)

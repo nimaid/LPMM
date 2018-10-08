@@ -1,4 +1,4 @@
-import copy
+import copy, functools
 import lp_events, lp_midi, lp_colors
 
 COLOR_ROOT = lp_colors.BLUE
@@ -122,9 +122,12 @@ def update():
                 lp_colors.setXY(x, y, COLOR_DEFAULT)
 
             if lp_events.pressed[x][y]:
-                old_note = lp_midi.note_when_pressed[x][y]
-                new_note = note #lambda uses pointers or something so I have to do this
-                lp_events.release_funcs[x][y] = lambda a, b : off_note_and_rebind_new_note(a, b, old_note, new_note)
+                prev_note = lp_midi.note_when_pressed[x][y]
+                print("X: " + str(x) + ", Y: " + str(y) + ", prev_note: " + str(prev_note))
+                #new_note = note #lambda uses pointers or something so I have to do this
+                #the lambda func always calls the LATEST old_note value
+                #lp_events.release_funcs[x][y] = lambda a, b : off_note_and_rebind_new_note(a, b, old_note, new_note)
+                lp_events.release_funcs[x][y] = functools.partial(off_note_and_rebind_new_note, old_note=prev_note, new_note = note)
             else:
                 lp_midi.bind_button_to_note(x, y, note)
 
