@@ -154,25 +154,8 @@ def octave_set(oct_in, rebind=True):
         octave = min(octave, 1)
     if rebind:
         bind_grid()
-    if lp_events.mode == "SCALEEDIT":
-        if octave == -2:
-            lp_colors.curr_colors[0][4] == lp_colors.RED
-        elif octave == -1:
-            lp_colors.curr_colors[1][4] == lp_colors.RED
-        elif octave == 0:
-            lp_colors.curr_colors[2][4] == lp_colors.RED
-        elif octave == 1:
-            lp_colors.curr_colors[3][4] == lp_colors.RED
-        elif octave == 2:
-            lp_colors.curr_colors[4][4] == lp_colors.RED
-        elif octave == 3:
-            lp_colors.curr_colors[5][4] == lp_colors.RED
-        elif octave == 4:
-            lp_colors.curr_colors[6][4] == lp_colors.RED
-        elif octave == 5:
-            lp_colors.curr_colors[7][4] == lp_colors.RED
     lp_colors.update()
-    print("[LPMM] OCTAVE DOWN, NOW " + str(octave) + "\n>>> ", end = "")
+    print("[LPMM] OCTAVE SET, NOW " + str(octave) + "\n>>> ", end = "")
 
 def key_set(key_in, rebind=True):
     global key

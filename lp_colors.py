@@ -83,6 +83,8 @@ def update():
                 set_color = None
                 if lp_events.pressed[x][y]:
                     set_color = effect_colors[x][y]
+                #should do something in lp_scaleedit like an "is activated" array that updates in the function calls of octave/key/scale/mode...
+                #maybe make a func that just updates that array and is called from all the O/K/S/M calls...
                 elif (lp_instrument.octave == -2) and (x == 0) and (y == 4):
                     set_color = effect_colors[x][y]
                 elif (lp_instrument.octave == -1) and (x == 1) and (y == 4):
