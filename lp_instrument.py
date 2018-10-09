@@ -179,6 +179,7 @@ def mode_set(mode_in, rebind=True):
     if lp_events.mode == "SCALEEDIT":
         lp_events.unbind_all()
         lp_scaleedit.bind_grid()
+        lp_scaleedit.bind_function_keys()
     lp_colors.update()
     print("[LPMM] MODE SET, NOW " + mode)
 
