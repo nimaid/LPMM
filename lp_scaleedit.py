@@ -23,7 +23,6 @@ def update_active():
     elif lp_instrument.octave == 5:
         active[7][4] = True
 
-
 def bind_grid():
     oct_neg2_bindable = lambda x, y : lp_instrument.octave_set(-2, False)
     lp_events.bind_func_with_colors(0, 4, oct_neg2_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
@@ -46,6 +45,10 @@ def bind_function_keys():
     instrument_mode_bindable = lambda x, y : lp_instrument.set_as_mode()
     lp_events.bind_func_with_colors(8, 1, lp_colors.update_bindable, lp_colors.RED_THIRD, lp_colors.RED, instrument_mode_bindable)
 
+    oct_up_bindable = lambda x, y : lp_instrument.octave_up(False)
+    lp_events.bind_func_with_colors(8, 3, oct_up_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER, lp_colors.update_bindable)
+    oct_down_bindable = lambda x, y : lp_instrument.octave_down(False)
+    lp_events.bind_func_with_colors(8, 4, oct_down_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER, lp_colors.update_bindable)
 
 
 def set_as_mode():
@@ -54,3 +57,4 @@ def set_as_mode():
     bind_grid()
     bind_function_keys()
     lp_colors.update()
+    print("[LPMM] SCALE EDIT MODE\n>>> ", end = "")
