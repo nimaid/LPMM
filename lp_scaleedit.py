@@ -1,5 +1,29 @@
 import lp_events, lp_colors, lp_instrument
 
+active = [[False for y in range(9)] for x in range(9)]
+
+def update_active():
+    global active
+    active = [[False for y in range(9)] for x in range(9)]
+
+    if lp_instrument.octave == -2:
+        active[0][4] = True
+    elif lp_instrument.octave == -1:
+        active[1][4] = True
+    elif lp_instrument.octave == 0:
+        active[2][4] = True
+    elif lp_instrument.octave == 1:
+        active[3][4] = True
+    elif lp_instrument.octave == 2:
+        active[4][4] = True
+    elif lp_instrument.octave == 3:
+        active[5][4] = True
+    elif lp_instrument.octave == 4:
+        active[6][4] = True
+    elif lp_instrument.octave == 5:
+        active[7][4] = True
+
+
 def bind_grid():
     oct_neg2_bindable = lambda x, y : lp_instrument.octave_set(-2, False)
     lp_events.bind_func_with_colors(0, 4, oct_neg2_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)

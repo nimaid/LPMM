@@ -135,6 +135,7 @@ def octave_up(rebind=True):
         octave = min(octave, 1)
     if(rebind):
         bind_grid()
+    lp_scaleedit.update_active()
     lp_colors.update()
     print("[LPMM] OCTAVE UP, NOW " + str(octave) + "\n>>> ", end = "")
 
@@ -144,6 +145,7 @@ def octave_down(rebind=True):
         octave -= 1
     if(rebind):
         bind_grid()
+    lp_scaleedit.update_active()
     lp_colors.update()
     print("[LPMM] OCTAVE DOWN, NOW " + str(octave) + "\n>>> ", end = "")
 
@@ -154,6 +156,7 @@ def octave_set(oct_in, rebind=True):
         octave = min(octave, 1)
     if rebind:
         bind_grid()
+    lp_scaleedit.update_active()
     lp_colors.update()
     print("[LPMM] OCTAVE SET, NOW " + str(octave) + "\n>>> ", end = "")
 
@@ -162,6 +165,7 @@ def key_set(key_in, rebind=True):
     key = key_in
     if rebind:
         bind_grid()
+    lp_scaleedit.update_active()
     lp_colors.update()
 
 def mode_set(mode_in, rebind=True):
@@ -172,6 +176,7 @@ def mode_set(mode_in, rebind=True):
         octave = min(octave, 1)
     if rebind:
         bind_grid()
+    lp_scaleedit.update_active()
     lp_colors.update()
 
 def scale_set(scale_in, rebind=True):
@@ -179,6 +184,7 @@ def scale_set(scale_in, rebind=True):
     scale = scale_in
     if rebind:
         bind_grid()
+    lp_scaleedit.update_active()
     lp_colors.update()
 
 def bind_function_keys():

@@ -1,5 +1,5 @@
 import copy, threading, time
-import lp_colors, lp_instrument
+import lp_colors, lp_instrument, lp_scaleedit
 
 RUN_DELAY = 0.005 #0.005 == 200 FPS
 
@@ -43,6 +43,7 @@ def start(lp_object):
     run(lp_object)
     lp_instrument.bind_grid()
     lp_instrument.bind_function_keys()
+    lp_scaleedit.update_active()
     lp_colors.update()
 
 def bind_func_with_colors(x, y, func, off_color, on_color = lp_colors.GREEN, release_func = None):
