@@ -77,16 +77,33 @@ def update():
                 else:
                     set_color = curr_colors[x][y]
                 lp_object.LedCtrlXYByCode(x, y, set_color)
-    else:
+    elif lp_events.mode == "SCALEEDIT":
         for x in range(8):
             for y in range(1, 9):
                 set_color = None
                 if lp_events.pressed[x][y]:
                     set_color = effect_colors[x][y]
+                elif (lp_instrument.octave == -2) and (x == 0) and (y == 4):
+                    set_color = effect_colors[x][y]
+                elif (lp_instrument.octave == -1) and (x == 1) and (y == 4):
+                    set_color = effect_colors[x][y]
+                elif (lp_instrument.octave == 0) and (x == 2) and (y == 4):
+                    set_color = effect_colors[x][y]
+                elif (lp_instrument.octave == 1) and (x == 3) and (y == 4):
+                    set_color = effect_colors[x][y]
+                elif (lp_instrument.octave == 2) and (x == 4) and (y == 4):
+                    set_color = effect_colors[x][y]
+                elif (lp_instrument.octave == 3) and (x == 5) and (y == 4):
+                    set_color = effect_colors[x][y]
+                elif (lp_instrument.octave == 4) and (x == 6) and (y == 4):
+                    set_color = effect_colors[x][y]
+                elif (lp_instrument.octave == 5) and (x == 7) and (y == 4):
+                    set_color = effect_colors[x][y]
                 else:
                     set_color = curr_colors[x][y]
                 lp_object.LedCtrlXYByCode(x, y, set_color)
 
+update_bindable = lambda x, y : update()
 # Just for fun, use lp_colors.rainbowreplace(lp_colors.LIGHTBLUE) in instrument mode ;)
 def rainbow_replace(replace_color):
     for x in range(8):

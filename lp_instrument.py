@@ -1,5 +1,5 @@
 import copy, functools
-import lp_events, lp_midi, lp_colors
+import lp_events, lp_midi, lp_colors, lp_scaleedit
 
 COLOR_ROOT = lp_colors.BLUE
 COLOR_SCALE = lp_colors.LIGHTBLUE
@@ -127,56 +127,90 @@ def bind_grid():
             else:
                 lp_midi.bind_button_to_note(x, y, note)
 
-def octave_up():
+def octave_up(rebind=True):
     global octave
     if octave < 5:
         octave += 1
     if mode == "SEQUENT":
         octave = min(octave, 1)
-    bind_grid()
+    if(rebind):
+        bind_grid()
     lp_colors.update()
     print("[LPMM] OCTAVE UP, NOW " + str(octave) + "\n>>> ", end = "")
 
-def octave_down():
+def octave_down(rebind=True):
     global octave
     if octave > -2:
         octave -= 1
-    bind_grid()
+    if(rebind):
+        bind_grid()
     lp_colors.update()
     print("[LPMM] OCTAVE DOWN, NOW " + str(octave) + "\n>>> ", end = "")
 
-def octave_set(oct_in):
+def octave_set(oct_in, rebind=True):
     global octave
     octave = min(max(oct_in, -2), 5)
     if mode == "SEQUENT":
         octave = min(octave, 1)
-    bind_grid()
+    if rebind:
+        bind_grid()
+    if lp_events.mode == "SCALEEDIT":
+        if octave == -2:
+            lp_colors.curr_colors[0][4] == lp_colors.RED
+        elif octave == -1:
+            lp_colors.curr_colors[1][4] == lp_colors.RED
+        elif octave == 0:
+            lp_colors.curr_colors[2][4] == lp_colors.RED
+        elif octave == 1:
+            lp_colors.curr_colors[3][4] == lp_colors.RED
+        elif octave == 2:
+            lp_colors.curr_colors[4][4] == lp_colors.RED
+        elif octave == 3:
+            lp_colors.curr_colors[5][4] == lp_colors.RED
+        elif octave == 4:
+            lp_colors.curr_colors[6][4] == lp_colors.RED
+        elif octave == 5:
+            lp_colors.curr_colors[7][4] == lp_colors.RED
     lp_colors.update()
+    print("[LPMM] OCTAVE DOWN, NOW " + str(octave) + "\n>>> ", end = "")
 
-def key_set(key_in):
+def key_set(key_in, rebind=True):
     global key
     key = key_in
-    bind_grid()
+    if rebind:
+        bind_grid()
     lp_colors.update()
 
-def mode_set(mode_in):
+def mode_set(mode_in, rebind=True):
     global mode
     global octave
     mode = mode_in
     if mode == "SEQUENT":
         octave = min(octave, 1)
-    bind_grid()
+    if rebind:
+        bind_grid()
     lp_colors.update()
 
-def scale_set(scale_in):
+def scale_set(scale_in, rebind=True):
     global scale
     scale = scale_in
-    bind_grid()
+    if rebind:
+        bind_grid()
     lp_colors.update()
 
 def bind_function_keys():
+    scaleedit_mode_bindable = lambda x, y : lp_scaleedit.set_as_mode()
+    lp_events.bind_func_with_colors(8, 1, scaleedit_mode_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
+
     oct_up_bindable = lambda x, y : octave_up()
-    colors_update_bindable = lambda x, y : lp_colors.update()
-    lp_events.bind_func_with_colors(8, 3, oct_up_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER, colors_update_bindable)
+    lp_events.bind_func_with_colors(8, 3, oct_up_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER, lp_colors.update_bindable)
     oct_down_bindable = lambda x, y : octave_down()
-    lp_events.bind_func_with_colors(8, 4, oct_down_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER, colors_update_bindable)
+    lp_events.bind_func_with_colors(8, 4, oct_down_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER, lp_colors.update_bindable)
+
+
+def set_as_mode():
+        lp_events.mode = "INSTRUMENT"
+        lp_events.unbind_all()
+        bind_grid()
+        bind_function_keys()
+        lp_colors.update()

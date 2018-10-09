@@ -1,15 +1,32 @@
 import lp_events, lp_colors, lp_instrument
 
 def bind_grid():
+    oct_neg2_bindable = lambda x, y : lp_instrument.octave_set(-2, False)
+    lp_events.bind_func_with_colors(0, 4, oct_neg2_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
+    oct_neg1_bindable = lambda x, y : lp_instrument.octave_set(-1, False)
+    lp_events.bind_func_with_colors(1, 4, oct_neg1_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
+    oct_0_bindable = lambda x, y : lp_instrument.octave_set(0, False)
+    lp_events.bind_func_with_colors(2, 4, oct_0_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
+    oct_1_bindable = lambda x, y : lp_instrument.octave_set(1, False)
+    lp_events.bind_func_with_colors(3, 4, oct_1_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
+    oct_2_bindable = lambda x, y : lp_instrument.octave_set(2, False)
+    lp_events.bind_func_with_colors(4, 4, oct_2_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
+    oct_3_bindable = lambda x, y : lp_instrument.octave_set(3, False)
+    lp_events.bind_func_with_colors(5, 4, oct_3_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
+    oct_4_bindable = lambda x, y : lp_instrument.octave_set(4, False)
+    lp_events.bind_func_with_colors(6, 4, oct_4_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
+    oct_5_bindable = lambda x, y : lp_instrument.octave_set(5, False)
+    lp_events.bind_func_with_colors(7, 4, oct_5_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
+
+def bind_function_keys():
+    instrument_mode_bindable = lambda x, y : lp_instrument.set_as_mode()
+    lp_events.bind_func_with_colors(8, 1, lp_colors.update_bindable, lp_colors.RED_THIRD, lp_colors.RED, instrument_mode_bindable)
+
+
+
+def set_as_mode():
+    lp_events.mode = "SCALEEDIT"
     lp_events.unbind_all()
-
-    colors_update_bindable = lambda x, y : lp_colors.update()
-
-    oct_neg2_bindable = lambda x, y : lp_instrument.octave_set(-2)
-    lp_events.bind_func_with_colors(0, 4, oct_neg2_bindable, lp_colors.RED_THIRD, lp_colors.RED, colors_update_bindable)
-
-    oct_neg1_bindable = lambda x, y : lp_instrument.octave_set(-1)
-    lp_events.bind_func_with_colors(1, 4, oct_neg1_bindable, lp_colors.RED_THIRD, lp_colors.RED)
-
-    oct_0_bindable = lambda x, y : lp_instrument.octave_set(0)
-    lp_events.bind_func_with_colors(2, 4, oct_0_bindable, lp_colors.RED_THIRD, lp_colors.RED)
+    bind_grid()
+    bind_function_keys()
+    lp_colors.update()
