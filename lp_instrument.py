@@ -43,8 +43,6 @@ working_notes = None
 working_scale = None
 full_working_scale = None
 
-
-
 def init():
     global base_note
     global working_notes
@@ -178,6 +176,9 @@ def mode_set(mode_in, rebind=True):
     if rebind:
         bind_grid()
     lp_scaleedit.update_active()
+    if lp_events.mode == "SCALEEDIT":
+        lp_events.unbind_all()
+        lp_scaleedit.bind_grid()
     lp_colors.update()
     print("[LPMM] MODE SET, NOW " + mode)
 
