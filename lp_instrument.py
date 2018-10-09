@@ -137,7 +137,7 @@ def octave_up(rebind=True):
         bind_grid()
     lp_scaleedit.update_active()
     lp_colors.update()
-    print("[LPMM] OCTAVE UP, NOW " + str(octave) + "\n>>> ", end = "")
+    print("[LPMM] OCTAVE UP, NOW " + str(octave))
 
 def octave_down(rebind=True):
     global octave
@@ -147,7 +147,7 @@ def octave_down(rebind=True):
         bind_grid()
     lp_scaleedit.update_active()
     lp_colors.update()
-    print("[LPMM] OCTAVE DOWN, NOW " + str(octave) + "\n>>> ", end = "")
+    print("[LPMM] OCTAVE DOWN, NOW " + str(octave))
 
 def octave_set(oct_in, rebind=True):
     global octave
@@ -158,7 +158,7 @@ def octave_set(oct_in, rebind=True):
         bind_grid()
     lp_scaleedit.update_active()
     lp_colors.update()
-    print("[LPMM] OCTAVE SET, NOW " + str(octave) + "\n>>> ", end = "")
+    print("[LPMM] OCTAVE SET, NOW " + str(octave))
 
 def key_set(key_in, rebind=True):
     global key
@@ -167,7 +167,7 @@ def key_set(key_in, rebind=True):
         bind_grid()
     lp_scaleedit.update_active()
     lp_colors.update()
-    print("[LPMM] KEY SET, NOW " + key + "\n>>> ", end = "")
+    print("[LPMM] KEY SET, NOW " + key)
 
 def mode_set(mode_in, rebind=True):
     global mode
@@ -179,7 +179,7 @@ def mode_set(mode_in, rebind=True):
         bind_grid()
     lp_scaleedit.update_active()
     lp_colors.update()
-    print("[LPMM] MODE SET, NOW " + mode + "\n>>> ", end = "")
+    print("[LPMM] MODE SET, NOW " + mode)
 
 def scale_set(scale_in, rebind=True):
     global scale
@@ -188,7 +188,7 @@ def scale_set(scale_in, rebind=True):
         bind_grid()
     lp_scaleedit.update_active()
     lp_colors.update()
-    print("[LPMM] SCALE SET, NOW " + str(scale_in) + "\n>>> ", end = "")
+    print("[LPMM] SCALE SET, NOW " + str(scale_in))
 
 def bind_function_keys():
     scaleedit_mode_bindable = lambda x, y : lp_scaleedit.set_as_mode()
@@ -206,4 +206,4 @@ def set_as_mode():
         bind_grid()
         bind_function_keys()
         lp_colors.update()
-        print("[LPMM] INSTRUMENT MODE\n>>> ", end = "")
+        print("[LPMM] INSTRUMENT MODE")

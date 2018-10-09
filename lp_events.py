@@ -4,10 +4,10 @@ import lp_colors, lp_instrument, lp_scaleedit
 RUN_DELAY = 0.005 #0.005 == 200 FPS
 
 def unbound_press(x, y):
-    print("[LPMM] UNBOUND BUTTON ("+str(x)+", "+str(y)+") DOWN\n>>> ", end = "")
+    print("[LPMM] UNBOUND BUTTON ("+str(x)+", "+str(y)+") DOWN")
 
 def unbound_release(x, y):
-    print("[LPMM] UNBOUND BUTTON ("+str(x)+", "+str(y)+") UP\n>>> ", end = "")
+    print("[LPMM] UNBOUND BUTTON ("+str(x)+", "+str(y)+") UP")
 
 press_funcs = [[unbound_press for y in range(9)] for x in range(9)]
 release_funcs = [[unbound_release for y in range(9)] for x in range(9)]

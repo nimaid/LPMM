@@ -1,4 +1,4 @@
-import sys, pygame
+import sys
 
 try:
     import launchpad_py as launchpad
@@ -10,8 +10,6 @@ except ImportError:
 
 import lp_events, lp_colors, lp_midi, lp_instrument, lp_scaleedit
 
-# print("[LPMM] \n>>> ", end = "")
-
 lp = launchpad.LaunchpadMk2();
 
 def init():
@@ -20,7 +18,7 @@ def init():
 
 def main():
     if lp.Open(0, "mk2"):
-        print("[LPMM] Connected to Launchpad Mk2!\n>>> ", end = "")
+        print("[LPMM] Connected to Launchpad Mk2!")
     else:
         print("[LPMM] Could not connect to Launchpad Mk2, exiting...")
         return

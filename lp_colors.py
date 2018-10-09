@@ -88,6 +88,7 @@ def update():
                 lp_object.LedCtrlXYByCode(x, y, set_color)
 
 update_bindable = lambda x, y : update()
+
 # Just for fun, use lp_colors.rainbowreplace(lp_colors.LIGHTBLUE) in instrument mode ;)
 def rainbow_replace(replace_color):
     for x in range(8):
