@@ -31,7 +31,7 @@ PURPLE_HALF = 49
 PURPLE_THIRD = 50
 
 curr_colors = [[BLACK for y in range(9)] for x in range(9)]
-effect_colors = [[GREEN for y in range(9)] for x in range(9)]
+effect_colors = [[BLACK for y in range(9)] for x in range(9)]
 
 import lp_events, lp_instrument, lp_midi
 
