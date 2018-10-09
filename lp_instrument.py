@@ -2,7 +2,7 @@ import copy, functools
 import lp_events, lp_midi, lp_colors
 
 COLOR_ROOT = lp_colors.BLUE
-COLOR_SCALE = lp_colors.LIGHT_BLUE
+COLOR_SCALE = lp_colors.LIGHTBLUE
 COLOR_DEFAULT = lp_colors.WHITE
 COLOR_EFFECT = lp_colors.GREEN
 
@@ -58,31 +58,31 @@ def init():
         for n in working_scale:
             num = (curr_oct*12)+n
             full_working_scale.append(num)
-    
+
     working_notes = [[]]
     for x in range(8):
         working_notes[0].append(None)
-    
+
     for y in range(8, 0, -1):
         working_notes.append([])
         row = 8 - y
-        
+
         offset = None
         if mode == "THIRD":
             offset = 2
         elif mode == "FOURTH":
             offset = 3
-        
+
         start_index = None
         if mode == "SEQUENT":
             start_index = len(scale) * row
         else:
             start_index = (row * offset)
-            
+
         for x in range(8):
             note = full_working_scale[start_index + x]
             working_notes[-1].append(note)
-            
+
         working_notes[-1].append(None)
     working_notes.reverse()
 
@@ -107,13 +107,13 @@ def off_note_and_rebind_new_note(x, y, old_note, new_note):
     lp_colors.update()
     lp_midi.bind_button_to_note(x, y, new_note)
 
-def update():
+def bind_grid():
     init()
-    
+
     for y in range(1, 9):
         for x in range(8):
             note = working_notes[y-1][x]
-            
+
             if note % 12 == base_note % 12:
                 lp_colors.setXY(x, y, COLOR_ROOT)
             elif note % 12 in [n%12 for n in working_scale]:
@@ -133,7 +133,7 @@ def octave_up():
         octave += 1
     if mode == "SEQUENT":
         octave = min(octave, 1)
-    update()
+    bind_grid()
     lp_colors.update()
     print("[LPMM] OCTAVE UP, NOW " + str(octave) + "\n>>> ", end = "")
 
@@ -141,7 +141,7 @@ def octave_down():
     global octave
     if octave > -2:
         octave -= 1
-    update()
+    bind_grid()
     lp_colors.update()
     print("[LPMM] OCTAVE DOWN, NOW " + str(octave) + "\n>>> ", end = "")
 
@@ -150,13 +150,13 @@ def octave_set(oct_in):
     octave = min(max(oct_in, -2), 5)
     if mode == "SEQUENT":
         octave = min(octave, 1)
-    update()
+    bind_grid()
     lp_colors.update()
 
 def key_set(key_in):
     global key
     key = key_in
-    update()
+    bind_grid()
     lp_colors.update()
 
 def mode_set(mode_in):
@@ -165,13 +165,13 @@ def mode_set(mode_in):
     mode = mode_in
     if mode == "SEQUENT":
         octave = min(octave, 1)
-    update()
+    bind_grid()
     lp_colors.update()
 
 def scale_set(scale_in):
     global scale
     scale = scale_in
-    update()
+    bind_grid()
     lp_colors.update()
 
 def bind_function_keys():

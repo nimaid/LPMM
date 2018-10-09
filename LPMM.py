@@ -8,7 +8,7 @@ except ImportError:
     except ImportError:
         sys.exit("[launchpad_py] Error loading launchpad.py")
 
-import lp_events, lp_colors, lp_midi, lp_instrument
+import lp_events, lp_colors, lp_midi, lp_instrument, lp_scaleedit
 
 # print("[LPMM] \n>>> ", end = "")
 
@@ -24,9 +24,9 @@ def main():
     else:
         print("[LPMM] Could not connect to Launchpad Mk2, exiting...")
         return
-    
+
     init()
-    
+
 
 main()
 

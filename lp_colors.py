@@ -17,9 +17,9 @@ YELLOW_THIRD = 15
 MINT = 29
 MINT_HALF = 30
 MINT_THIRD = 31
-LIGHT_BLUE = 37
-LIGHT_BLUE_HALF = 38
-LIGHT_BLUE_THIRD = 39
+LIGHTBLUE = 37
+LIGHTBLUE_HALF = 38
+LIGHTBLUE_THIRD = 39
 BLUE = 45
 BLUE_HALF = 46
 BLUE_THIRD = 47
@@ -40,7 +40,7 @@ lp_object = None
 def init(lp_object_in):
     global lp_object
     lp_object = lp_object_in
-                
+
 
 def setXY(x, y, color):
     curr_colors[x][y] = color
@@ -67,7 +67,7 @@ def update():
         else:
             set_color = curr_colors[8][y]
         lp_object.LedCtrlXYByCode(8, y, set_color)
-        
+
     if lp_events.mode == "INSTRUMENT":
         for x in range(8):
             for y in range(1, 9):
@@ -86,3 +86,30 @@ def update():
                 else:
                     set_color = curr_colors[x][y]
                 lp_object.LedCtrlXYByCode(x, y, set_color)
+
+# Just for fun, use lp_colors.rainbowreplace(lp_colors.LIGHTBLUE) in instrument mode ;)
+def rainbow_replace(replace_color):
+    for x in range(8):
+        for y in range(1, 9):
+            if curr_colors[x][y] == replace_color:
+                rainbow_color = None
+                if y == 1:
+                    rainbow_color = PINK_THIRD
+                elif y == 2:
+                    rainbow_color = RED_THIRD
+                elif y == 3:
+                    rainbow_color = AMBER_THIRD
+                elif y == 4:
+                    rainbow_color = YELLOW_THIRD
+                elif y == 5:
+                    rainbow_color = GREEN_THIRD
+                elif y == 6:
+                    rainbow_color = LIGHTBLUE_THIRD
+                elif y == 7:
+                    rainbow_color = BLUE_THIRD
+                else:
+                    rainbow_color = PURPLE_THIRD
+
+                curr_colors[x][y] = rainbow_color
+    update()
+
