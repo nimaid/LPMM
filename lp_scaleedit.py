@@ -1,6 +1,6 @@
-import lp_events, lp_colors, lp_instrument
+#TODO: Fix binding on already pressed notes when switching from inst mode to turn off note, rebind to correct function (could do after binding by cpoying func...)
 
-#ERROR when letting go of scaleedit button when holding setting button... note_off gets none note
+import lp_events, lp_colors, lp_instrument
 
 active = [[False for y in range(9)] for x in range(9)]
 is_active = False
@@ -178,11 +178,11 @@ def bind_function_keys():
 
 def set_as_mode():
     global is_active
-    is_active = True
-    lp_instrument.is_active = False
     lp_events.mode = "SCALEEDIT"
     lp_events.unbind_all()
     bind_grid()
     bind_function_keys()
     lp_colors.update()
+    is_active = True
+    lp_instrument.is_active = False
     print("[LPMM] SCALE EDIT MODE")

@@ -1,3 +1,5 @@
+#TODO: change octaves to limit dymanically based on scale/key/octave/mode
+
 import copy, functools
 import lp_events, lp_midi, lp_colors, lp_scaleedit
 
@@ -102,8 +104,9 @@ def get_keys_bound_to_note(note):
                 same_note.append((a, b))
     return same_note
 
-def off_note_and_rebind_new_note(x, y, old_note, new_note):
-    lp_midi.note_off(x, y, old_note)
+def off_note_and_rebind_new_note(x, y, old_note, new_note, off_note = True):
+    if off_note:
+        lp_midi.note_off(x, y, old_note)
     lp_colors.update()
     lp_midi.bind_button_to_note(x, y, new_note)
 
@@ -122,8 +125,13 @@ def bind_grid():
                 lp_colors.setXY(x, y, COLOR_DEFAULT)
 
             if lp_events.pressed[x][y]:
-                prev_note = lp_midi.note_when_pressed[x][y]
-                lp_events.release_funcs[x][y] = functools.partial(off_note_and_rebind_new_note, old_note=prev_note, new_note=note)
+                if lp_scaleedit.is_active:
+                    curr_note = working_notes[y-1][x]
+                    #bind the release to a func that: updates colors, rebinds to correct note
+                    lp_events.release_funcs[x][y] = functools.partial(off_note_and_rebind_new_note, old_note=None, new_note=curr_note, off_note=False)
+                else:
+                    prev_note = lp_midi.note_when_pressed[x][y]
+                    lp_events.release_funcs[x][y] = functools.partial(off_note_and_rebind_new_note, old_note=prev_note, new_note=note)
             else:
                 lp_midi.bind_button_to_note(x, y, note)
 
@@ -206,12 +214,12 @@ def bind_function_keys():
 
 def set_as_mode(unbind = True):
     global is_active
-    is_active = True
-    lp_scaleedit.is_active = False
     lp_events.mode = "INSTRUMENT"
     if unbind:
         lp_events.unbind_all()
     bind_grid()
     bind_function_keys()
     lp_colors.update()
+    is_active = True
+    lp_scaleedit.is_active = False
     print("[LPMM] INSTRUMENT MODE")
