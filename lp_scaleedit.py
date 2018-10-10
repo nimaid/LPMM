@@ -49,6 +49,42 @@ def update_active():
         active[6][5] = True
     elif lp_instrument.scale == lp_instrument.SCALE_DIMINISHED:
         active[7][5] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_WHOLEHALF:
+        active[0][6] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_WHOLETONE:
+        active[1][6] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_MINORBLUES:
+        active[2][6] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_MINORPENTATONIC:
+        active[3][6] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_MAJORPENTATONIC:
+        active[4][6] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_HARMONICMINOR:
+        active[5][6] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_MELODICMINOR:
+        active[6][6] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_SUPERLOCRIAN:
+        active[7][6] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_BHAIRAV:
+        active[0][7] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_HUNGARIANMINOR:
+        active[1][7] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_MINORGYPSY:
+        active[2][7] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_HIRAJOSHI:
+        active[3][7] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_INSEN:
+        active[4][7] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_IWATO:
+        active[5][7] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_KUMOI:
+        active[6][7] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_PELOG:
+        active[7][7] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_SPANISH:
+        active[0][8] = True
+    elif lp_instrument.scale == lp_instrument.SCALE_IONEOL:
+        active[1][8] = True
 
 def bind_grid():
     mode_sequent_bindable = lambda x, y : lp_instrument.mode_set("SEQUENT", False)
@@ -92,6 +128,42 @@ def bind_grid():
     lp_events.bind_func_with_colors(6, 5, scale_locrian_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
     scale_diminished_bindable = lambda x, y : lp_instrument.scale_set("DIMINISHED", False)
     lp_events.bind_func_with_colors(7, 5, scale_diminished_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_wholehalf_bindable = lambda x, y : lp_instrument.scale_set("WHOLEHALF", False)
+    lp_events.bind_func_with_colors(0, 6, scale_wholehalf_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_wholetone_bindable = lambda x, y : lp_instrument.scale_set("WHOLETONE", False)
+    lp_events.bind_func_with_colors(1, 6, scale_wholetone_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_minorblues_bindable = lambda x, y : lp_instrument.scale_set("MINORBLUES", False)
+    lp_events.bind_func_with_colors(2, 6, scale_minorblues_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_minorpentatonic_bindable = lambda x, y : lp_instrument.scale_set("MINORPENTATONIC", False)
+    lp_events.bind_func_with_colors(3, 6, scale_minorpentatonic_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_majorpentatonic_bindable = lambda x, y : lp_instrument.scale_set("MAJORPENTATONIC", False)
+    lp_events.bind_func_with_colors(4, 6, scale_majorpentatonic_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_harmonicminor_bindable = lambda x, y : lp_instrument.scale_set("HARMONICMINOR", False)
+    lp_events.bind_func_with_colors(5, 6, scale_harmonicminor_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_melodicminor_bindable = lambda x, y : lp_instrument.scale_set("MELODICMINOR", False)
+    lp_events.bind_func_with_colors(6, 6, scale_melodicminor_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_superlocrian_bindable = lambda x, y : lp_instrument.scale_set("SUPERLOCRIAN", False)
+    lp_events.bind_func_with_colors(7, 6, scale_superlocrian_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_bhairav_bindable = lambda x, y : lp_instrument.scale_set("BHAIRAV", False)
+    lp_events.bind_func_with_colors(0, 7, scale_bhairav_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_hungarianminor_bindable = lambda x, y : lp_instrument.scale_set("HUNGARIANMINOR", False)
+    lp_events.bind_func_with_colors(1, 7, scale_hungarianminor_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_minorgypsy_bindable = lambda x, y : lp_instrument.scale_set("MINORGYPSY", False)
+    lp_events.bind_func_with_colors(2, 7, scale_minorgypsy_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_hirajoshi_bindable = lambda x, y : lp_instrument.scale_set("HIRAJOSHI", False)
+    lp_events.bind_func_with_colors(3, 7, scale_hirajoshi_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_insen_bindable = lambda x, y : lp_instrument.scale_set("INSEN", False)
+    lp_events.bind_func_with_colors(4, 7, scale_insen_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_iwato_bindable = lambda x, y : lp_instrument.scale_set("IWATO", False)
+    lp_events.bind_func_with_colors(5, 7, scale_iwato_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_kumoi_bindable = lambda x, y : lp_instrument.scale_set("KUMOI", False)
+    lp_events.bind_func_with_colors(6, 7, scale_kumoi_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_pelog_bindable = lambda x, y : lp_instrument.scale_set("PELOG", False)
+    lp_events.bind_func_with_colors(7, 7, scale_pelog_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_spanish_bindable = lambda x, y : lp_instrument.scale_set("SPANISH", False)
+    lp_events.bind_func_with_colors(0, 8, scale_spanish_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    scale_ioneol_bindable = lambda x, y : lp_instrument.scale_set("IONEOL", False)
+    lp_events.bind_func_with_colors(1, 8, scale_ioneol_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
 
 def bind_function_keys():
     instrument_mode_bindable = lambda x, y : lp_instrument.set_as_mode()

@@ -26,13 +26,13 @@ Sort of! It does work as a middleman, but with only a few of the features I want
 * ~~Octave up and down buttons~~
 * ~~A dynamic scale system~~
 * ~~All scales~~
-* Scale selector
+* ~~Scale selector~~
 * ~~Diatonic scale modes system~~
 * ~~All diatonic scale modes~~
 * Chromatic scale mode system
 * All chromatic scale modes
 * Drum rack scale mode
-* Scale mode selector
+* Scale mode selector (partially complete)
 * Relative scale, 5th left, and 5th right buttons
 * Quick Scale Mode
 * Remaining minor Scale Edit Mode Features
