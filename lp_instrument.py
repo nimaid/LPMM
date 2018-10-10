@@ -43,6 +43,8 @@ working_notes = None
 working_scale = None
 full_working_scale = None
 
+is_active = True
+
 def init():
     global base_note
     global working_notes
@@ -202,10 +204,14 @@ def bind_function_keys():
     lp_events.bind_func_with_colors(8, 4, oct_down_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
 
 
-def set_as_mode():
-        lp_events.mode = "INSTRUMENT"
+def set_as_mode(unbind = True):
+    global is_active
+    is_active = True
+    lp_scaleedit.is_active = False
+    lp_events.mode = "INSTRUMENT"
+    if unbind:
         lp_events.unbind_all()
-        bind_grid()
-        bind_function_keys()
-        lp_colors.update()
-        print("[LPMM] INSTRUMENT MODE")
+    bind_grid()
+    bind_function_keys()
+    lp_colors.update()
+    print("[LPMM] INSTRUMENT MODE")

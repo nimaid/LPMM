@@ -3,6 +3,7 @@ import lp_events, lp_colors, lp_instrument
 #ERROR when letting go of scaleedit button when holding setting button... note_off gets none note
 
 active = [[False for y in range(9)] for x in range(9)]
+is_active = False
 
 def update_active():
     global active
@@ -176,6 +177,9 @@ def bind_function_keys():
 
 
 def set_as_mode():
+    global is_active
+    is_active = True
+    lp_instrument.is_active = False
     lp_events.mode = "SCALEEDIT"
     lp_events.unbind_all()
     bind_grid()
