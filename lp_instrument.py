@@ -194,12 +194,12 @@ def scale_set(scale_in, rebind=True):
 
 def bind_function_keys():
     scaleedit_mode_bindable = lambda x, y : lp_scaleedit.set_as_mode()
-    lp_events.bind_func_with_colors(8, 1, scaleedit_mode_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
+    lp_events.bind_func_with_colors(8, 1, scaleedit_mode_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER, lp_colors.update_bindable)
 
     oct_up_bindable = lambda x, y : octave_up()
-    lp_events.bind_func_with_colors(8, 3, oct_up_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER, lp_colors.update_bindable)
+    lp_events.bind_func_with_colors(8, 3, oct_up_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
     oct_down_bindable = lambda x, y : octave_down()
-    lp_events.bind_func_with_colors(8, 4, oct_down_bindable, lp_colors.AMBER_THIRD, lp_colors.AMBER, lp_colors.update_bindable)
+    lp_events.bind_func_with_colors(8, 4, oct_down_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
 
 
 def set_as_mode():

@@ -1,6 +1,4 @@
-import contextlib
-with contextlib.redirect_stdout(None):
-    import pygame
+import pygame
 import lp_events, lp_colors, lp_instrument
 
 curr_notes = set()
