@@ -20,8 +20,8 @@ Sort of! It does work as a middleman, but with only a few of the features I want
 * Generalize to all Launchpads
 * Advanced light feedback effects
 * Multi-Launchpad support
-* MIDI Connection Selection
-* Launchpad Selector
+* MIDI connection selector
+* Launchpad selector
 ### Instrument Mode / Scale Edit Mode
 * ~~A basic major scale~~
 * A key selector
@@ -32,7 +32,7 @@ Sort of! It does work as a middleman, but with only a few of the features I want
 * ~~Scale selector~~
 * ~~Diatonic scale modes system~~
 * ~~All diatonic scale modes~~
-* MIDI In Light Feedback
+* MIDI in light feedback
 * Chromatic scale mode system
 * All chromatic scale modes
 * Drum rack scale mode
