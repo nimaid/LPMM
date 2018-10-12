@@ -42,11 +42,7 @@ def start(lp_object):
     init(lp_object)
     run(lp_object)
     lp_instrument.set_as_mode(False)
-    #lp_instrument.bind_grid()
-    #lp_instrument.bind_function_keys()
-    #lp_instrument.is_active = True
     lp_scaleedit.update_active()
-    #lp_colors.update()
 
 def bind_func_with_colors(x, y, func, off_color, on_color = lp_colors.GREEN, release_func = None):
     global press_funcs

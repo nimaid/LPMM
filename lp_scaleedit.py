@@ -16,6 +16,30 @@ def update_active():
     elif lp_instrument.mode == "FOURTH":
         active[5][1] = True
 
+    if lp_instrument.key == "C":
+        active[0][3] = True
+    elif lp_instrument.key == "Db":
+        active[0][2] = True
+    elif lp_instrument.key == "D":
+        active[1][3] = True
+    elif lp_instrument.key == "Eb":
+        active[1][2] = True
+    elif lp_instrument.key == "E":
+        active[2][3] = True
+    elif lp_instrument.key == "F":
+        active[3][3] = True
+    elif lp_instrument.key == "Gb":
+        active[3][2] = True
+    elif lp_instrument.key == "G":
+        active[4][3] = True
+    elif lp_instrument.key == "Ab":
+        active[4][2] = True
+    elif lp_instrument.key == "A":
+        active[5][3] = True
+    elif lp_instrument.key == "Bb":
+        active[5][2] = True
+    elif lp_instrument.key == "B":
+        active[6][3] = True
 
     if lp_instrument.octave == -2:
         active[0][4] = True
@@ -87,6 +111,9 @@ def update_active():
     elif lp_instrument.scale == lp_instrument.SCALE_IONEOL:
         active[1][8] = True
 
+def rebind_pressed_notes():
+    return None
+
 def bind_grid():
     mode_sequent_bindable = lambda x, y : lp_instrument.mode_set("SEQUENT", False)
     lp_events.bind_func_with_colors(3, 1, mode_sequent_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
@@ -94,6 +121,31 @@ def bind_grid():
     lp_events.bind_func_with_colors(4, 1, mode_third_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
     mode_fourth_bindable = lambda x, y : lp_instrument.mode_set("FOURTH", False)
     lp_events.bind_func_with_colors(5, 1, mode_fourth_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
+
+    key_C_bindable = lambda x, y : lp_instrument.key_set("C", False)
+    lp_events.bind_func_with_colors(0, 3, key_C_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
+    key_Db_bindable = lambda x, y : lp_instrument.key_set("Db", False)
+    lp_events.bind_func_with_colors(0, 2, key_Db_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
+    key_D_bindable = lambda x, y : lp_instrument.key_set("D", False)
+    lp_events.bind_func_with_colors(1, 3, key_D_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
+    key_Eb_bindable = lambda x, y : lp_instrument.key_set("Eb", False)
+    lp_events.bind_func_with_colors(1, 2, key_Eb_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
+    key_E_bindable = lambda x, y : lp_instrument.key_set("E", False)
+    lp_events.bind_func_with_colors(2, 3, key_E_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
+    key_F_bindable = lambda x, y : lp_instrument.key_set("F", False)
+    lp_events.bind_func_with_colors(3, 3, key_F_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
+    key_Gb_bindable = lambda x, y : lp_instrument.key_set("Gb", False)
+    lp_events.bind_func_with_colors(3, 2, key_Gb_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
+    key_G_bindable = lambda x, y : lp_instrument.key_set("G", False)
+    lp_events.bind_func_with_colors(4, 3, key_G_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
+    key_Ab_bindable = lambda x, y : lp_instrument.key_set("Ab", False)
+    lp_events.bind_func_with_colors(4, 2, key_Ab_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
+    key_A_bindable = lambda x, y : lp_instrument.key_set("A", False)
+    lp_events.bind_func_with_colors(5, 3, key_A_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
+    key_Bb_bindable = lambda x, y : lp_instrument.key_set("Bb", False)
+    lp_events.bind_func_with_colors(5, 2, key_Bb_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
+    key_B_bindable = lambda x, y : lp_instrument.key_set("B", False)
+    lp_events.bind_func_with_colors(6, 3, key_B_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
 
     oct_neg2_bindable = lambda x, y : lp_instrument.octave_set(-2, False)
     lp_events.bind_func_with_colors(0, 4, oct_neg2_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
@@ -165,6 +217,8 @@ def bind_grid():
     lp_events.bind_func_with_colors(0, 8, scale_spanish_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
     scale_ioneol_bindable = lambda x, y : lp_instrument.scale_set("IONEOL", False)
     lp_events.bind_func_with_colors(1, 8, scale_ioneol_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+
+    rebind_pressed_notes()
 
 def bind_function_keys():
     instrument_mode_bindable = lambda x, y : lp_instrument.set_as_mode()
