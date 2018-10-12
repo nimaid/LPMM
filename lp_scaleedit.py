@@ -118,11 +118,10 @@ def rebind_pressed_notes():
     for x in range(8):
         for y in range(1, 9):
             if lp_events.pressed[x][y]:
-                print("X: " + str(x) + ", Y: " + str(y))
                 old_note = lp_instrument.working_notes[y-1][x]
-                print("note: " + str(old_note))
+                old_func_in = lp_events.release_funcs[x][y]
 
-                lp_events.release_funcs[x][y] = functools.partial(note_off_and_bind_old_release_func, old_func=lp_events.release_funcs[x][y], note=old_note)
+                lp_events.release_funcs[x][y] = functools.partial(note_off_and_bind_old_release_func, old_func=old_func_in, note=old_note)
 
 
 def bind_grid():
