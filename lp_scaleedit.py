@@ -1,6 +1,5 @@
-#TODO: Fix binding on already pressed notes when switching from inst mode to turn off note, rebind to correct function (could do after binding by cpoying func...)
-
-import lp_events, lp_colors, lp_instrument
+import functools
+import lp_events, lp_colors, lp_instrument, lp_midi
 
 active = [[False for y in range(9)] for x in range(9)]
 is_active = False
@@ -111,8 +110,20 @@ def update_active():
     elif lp_instrument.scale == lp_instrument.SCALE_IONEOL:
         active[1][8] = True
 
+def note_off_and_bind_old_release_func(x, y, old_func, note):
+    lp_midi.note_off(x, y, note)
+    lp_events.release_funcs[x][y] = old_func
+
 def rebind_pressed_notes():
-    return None
+    for x in range(8):
+        for y in range(1, 9):
+            if lp_events.pressed[x][y]:
+                print("X: " + str(x) + ", Y: " + str(y))
+                old_note = lp_instrument.working_notes[y-1][x]
+                print("note: " + str(old_note))
+
+                lp_events.release_funcs[x][y] = functools.partial(note_off_and_bind_old_release_func, old_func=lp_events.release_funcs[x][y], note=old_note)
+
 
 def bind_grid():
     mode_sequent_bindable = lambda x, y : lp_instrument.mode_set("SEQUENT", False)
