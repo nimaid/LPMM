@@ -123,7 +123,6 @@ def rebind_pressed_notes():
 
                 lp_events.release_funcs[x][y] = functools.partial(note_off_and_bind_old_release_func, old_func=old_func_in, note=old_note)
 
-
 def bind_grid():
     mode_sequent_bindable = lambda x, y : lp_instrument.mode_set("SEQUENT", False)
     lp_events.bind_func_with_colors(3, 1, mode_sequent_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
@@ -158,21 +157,28 @@ def bind_grid():
     lp_events.bind_func_with_colors(6, 3, key_B_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
 
     oct_neg2_bindable = lambda x, y : lp_instrument.octave_set(-2, False)
-    lp_events.bind_func_with_colors(0, 4, oct_neg2_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
+    if lp_instrument.octave_is_valid(-2):
+        lp_events.bind_func_with_colors(0, 4, oct_neg2_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
     oct_neg1_bindable = lambda x, y : lp_instrument.octave_set(-1, False)
-    lp_events.bind_func_with_colors(1, 4, oct_neg1_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
+    if lp_instrument.octave_is_valid(-1):
+        lp_events.bind_func_with_colors(1, 4, oct_neg1_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
     oct_0_bindable = lambda x, y : lp_instrument.octave_set(0, False)
-    lp_events.bind_func_with_colors(2, 4, oct_0_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
+    if lp_instrument.octave_is_valid(0):
+        lp_events.bind_func_with_colors(2, 4, oct_0_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
     oct_1_bindable = lambda x, y : lp_instrument.octave_set(1, False)
-    lp_events.bind_func_with_colors(3, 4, oct_1_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
-    if lp_instrument.mode != "SEQUENT":
-        oct_2_bindable = lambda x, y : lp_instrument.octave_set(2, False)
+    if lp_instrument.octave_is_valid(1):
+        lp_events.bind_func_with_colors(3, 4, oct_1_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
+    oct_2_bindable = lambda x, y : lp_instrument.octave_set(2, False)
+    if lp_instrument.octave_is_valid(2):
         lp_events.bind_func_with_colors(4, 4, oct_2_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
-        oct_3_bindable = lambda x, y : lp_instrument.octave_set(3, False)
+    oct_3_bindable = lambda x, y : lp_instrument.octave_set(3, False)
+    if lp_instrument.octave_is_valid(3):
         lp_events.bind_func_with_colors(5, 4, oct_3_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
-        oct_4_bindable = lambda x, y : lp_instrument.octave_set(4, False)
+    oct_4_bindable = lambda x, y : lp_instrument.octave_set(4, False)
+    if lp_instrument.octave_is_valid(4):
         lp_events.bind_func_with_colors(6, 4, oct_4_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
-        oct_5_bindable = lambda x, y : lp_instrument.octave_set(5, False)
+    oct_5_bindable = lambda x, y : lp_instrument.octave_set(5, False)
+    if lp_instrument.octave_is_valid(5):
         lp_events.bind_func_with_colors(7, 4, oct_5_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
 
     scale_major_bindable = lambda x, y : lp_instrument.scale_set("MAJOR", False)

@@ -1,4 +1,4 @@
-#TODO: change octaves to limit dymanically based on scale/key/octave/mode
+#TODO: clip octaves when key/scale/mode/octave changes
 
 import copy, functools
 import lp_events, lp_midi, lp_colors, lp_scaleedit
@@ -135,37 +135,63 @@ def bind_grid():
             else:
                 lp_midi.bind_button_to_note(x, y, note)
 
+def octave_is_valid(new_octave):
+    global octave
+    old_octave = copy.copy(octave)
+
+    octave = new_octave
+    init()
+    octave = old_octave
+    if (working_notes[0][7] > 127) or (working_notes[7][0] < 0):
+        init()
+        return False
+    else:
+        init()
+        return True
+
 def octave_up(rebind=True):
     global octave
-    if octave < 5:
-        octave += 1
-    if mode == "SEQUENT":
-        octave = min(octave, 1)
-    if(rebind):
-        bind_grid()
-    lp_scaleedit.update_active()
-    lp_colors.update()
+    new_octave = octave + 1
+    if octave_is_valid(new_octave):
+        octave = new_octave
+        if(rebind):
+            bind_grid()
+        lp_scaleedit.update_active()
+        if lp_events.mode == "SCALEEDIT":
+            lp_events.unbind_all(False)
+            lp_scaleedit.bind_grid()
+            lp_scaleedit.bind_function_keys()
+        lp_colors.update()
     print("[LPMM] OCTAVE UP, NOW " + str(octave))
 
 def octave_down(rebind=True):
     global octave
-    if octave > -2:
-        octave -= 1
-    if(rebind):
-        bind_grid()
-    lp_scaleedit.update_active()
-    lp_colors.update()
+    new_octave = octave - 1
+    if octave_is_valid(new_octave):
+        octave = new_octave
+        if(rebind):
+            bind_grid()
+        lp_scaleedit.update_active()
+        if lp_events.mode == "SCALEEDIT":
+            lp_events.unbind_all(False)
+            lp_scaleedit.bind_grid()
+            lp_scaleedit.bind_function_keys()
+        lp_colors.update()
     print("[LPMM] OCTAVE DOWN, NOW " + str(octave))
 
 def octave_set(oct_in, rebind=True):
     global octave
-    octave = min(max(oct_in, -2), 5)
-    if mode == "SEQUENT":
-        octave = min(octave, 1)
-    if rebind:
-        bind_grid()
-    lp_scaleedit.update_active()
-    lp_colors.update()
+    if octave_is_valid(oct_in):
+        print(oct_in)
+        octave = oct_in
+        if rebind:
+            bind_grid()
+        lp_scaleedit.update_active()
+        if lp_events.mode == "SCALEEDIT":
+            lp_events.unbind_all(False)
+            lp_scaleedit.bind_grid()
+            lp_scaleedit.bind_function_keys()
+        lp_colors.update()
     print("[LPMM] OCTAVE SET, NOW " + str(octave))
 
 def key_set(key_in, rebind=True):
@@ -174,6 +200,10 @@ def key_set(key_in, rebind=True):
     if rebind:
         bind_grid()
     lp_scaleedit.update_active()
+    if lp_events.mode == "SCALEEDIT":
+        lp_events.unbind_all(False)
+        lp_scaleedit.bind_grid()
+        lp_scaleedit.bind_function_keys()
     lp_colors.update()
     print("[LPMM] KEY SET, NOW " + key)
 
@@ -181,13 +211,12 @@ def mode_set(mode_in, rebind=True):
     global mode
     global octave
     mode = mode_in
-    if mode == "SEQUENT":
-        octave = min(octave, 1)
+
     if rebind:
         bind_grid()
     lp_scaleedit.update_active()
     if lp_events.mode == "SCALEEDIT":
-        lp_events.unbind_all()
+        lp_events.unbind_all(False)
         lp_scaleedit.bind_grid()
         lp_scaleedit.bind_function_keys()
     lp_colors.update()
@@ -199,6 +228,10 @@ def scale_set(scale_in, rebind=True):
     if rebind:
         bind_grid()
     lp_scaleedit.update_active()
+    if lp_events.mode == "SCALEEDIT":
+        lp_events.unbind_all(False)
+        lp_scaleedit.bind_grid()
+        lp_scaleedit.bind_function_keys()
     lp_colors.update()
     print("[LPMM] SCALE SET, NOW " + str(scale_in))
 
