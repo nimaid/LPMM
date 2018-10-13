@@ -1,5 +1,3 @@
-#TODO: clip octaves when key/scale/mode/octave changes
-
 import copy, functools
 import lp_events, lp_midi, lp_colors, lp_scaleedit
 
@@ -149,54 +147,64 @@ def octave_is_valid(new_octave):
         init()
         return True
 
-def octave_up(rebind=True):
+def octave_clip():
     global octave
-    new_octave = octave + 1
+    new_octave = octave
+    while (not octave_is_valid(new_octave)) and (new_octave >= 0):
+        new_octave -= 1
+    while (not octave_is_valid(new_octave)) and (new_octave < 8):
+        new_octave += 1
     if octave_is_valid(new_octave):
         octave = new_octave
-        if(rebind):
-            bind_grid()
-        lp_scaleedit.update_active()
-        if lp_events.mode == "SCALEEDIT":
-            lp_events.unbind_all(False)
-            lp_scaleedit.bind_grid()
-            lp_scaleedit.bind_function_keys()
-        lp_colors.update()
+    else:
+        print("ERROR! NO OCTAVES ARE VALID!!!")
+
+def octave_up(rebind=True):
+    global octave
+    octave += 1
+    octave_clip()
+    if(rebind):
+        bind_grid()
+    lp_scaleedit.update_active()
+    if lp_events.mode == "SCALEEDIT":
+        lp_events.unbind_all(False)
+        lp_scaleedit.bind_grid()
+        lp_scaleedit.bind_function_keys()
+    lp_colors.update()
     print("[LPMM] OCTAVE UP, NOW " + str(octave))
 
 def octave_down(rebind=True):
     global octave
-    new_octave = octave - 1
-    if octave_is_valid(new_octave):
-        octave = new_octave
-        if(rebind):
-            bind_grid()
-        lp_scaleedit.update_active()
-        if lp_events.mode == "SCALEEDIT":
-            lp_events.unbind_all(False)
-            lp_scaleedit.bind_grid()
-            lp_scaleedit.bind_function_keys()
-        lp_colors.update()
+    octave -= 1
+    octave_clip()
+    if(rebind):
+        bind_grid()
+    lp_scaleedit.update_active()
+    if lp_events.mode == "SCALEEDIT":
+        lp_events.unbind_all(False)
+        lp_scaleedit.bind_grid()
+        lp_scaleedit.bind_function_keys()
+    lp_colors.update()
     print("[LPMM] OCTAVE DOWN, NOW " + str(octave))
 
 def octave_set(oct_in, rebind=True):
     global octave
-    if octave_is_valid(oct_in):
-        print(oct_in)
-        octave = oct_in
-        if rebind:
-            bind_grid()
-        lp_scaleedit.update_active()
-        if lp_events.mode == "SCALEEDIT":
-            lp_events.unbind_all(False)
-            lp_scaleedit.bind_grid()
-            lp_scaleedit.bind_function_keys()
-        lp_colors.update()
+    octave = oct_in
+    octave_clip()
+    if rebind:
+        bind_grid()
+    lp_scaleedit.update_active()
+    if lp_events.mode == "SCALEEDIT":
+        lp_events.unbind_all(False)
+        lp_scaleedit.bind_grid()
+        lp_scaleedit.bind_function_keys()
+    lp_colors.update()
     print("[LPMM] OCTAVE SET, NOW " + str(octave))
 
 def key_set(key_in, rebind=True):
     global key
     key = key_in
+    octave_clip()
     if rebind:
         bind_grid()
     lp_scaleedit.update_active()
@@ -211,7 +219,7 @@ def mode_set(mode_in, rebind=True):
     global mode
     global octave
     mode = mode_in
-
+    octave_clip()
     if rebind:
         bind_grid()
     lp_scaleedit.update_active()
@@ -225,6 +233,7 @@ def mode_set(mode_in, rebind=True):
 def scale_set(scale_in, rebind=True):
     global scale
     scale = globals()["SCALE_" + scale_in] #haha doing this just so I can print the name of the scale... and now it takes a string like the other funcs
+    octave_clip()
     if rebind:
         bind_grid()
     lp_scaleedit.update_active()
