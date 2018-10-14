@@ -255,7 +255,7 @@ def mode_set(mode_in, rebind=True):
     lp_colors.update()
     print("[LPMM] MODE SET, NOW " + mode)
 
-def scale_set(scale_in, rebind=True):
+def scale_set(scale_in, rebind=True, print_mesg=True):
     global scale
     scale = globals()["SCALE_" + scale_in] #haha doing this just so I can print the name of the scale... and now it takes a string like the other funcs
     octave_clip()
@@ -267,7 +267,27 @@ def scale_set(scale_in, rebind=True):
         lp_scaleedit.bind_grid()
         lp_scaleedit.bind_function_keys()
     lp_colors.update()
-    print("[LPMM] SCALE SET, NOW " + str(scale_in))
+    if print_mesg:
+        print("[LPMM] SCALE SET, NOW " + str(scale_in))
+
+def scale_relative():
+    global key
+    key_offset = lp_midi.NOTE_OFFSETS[key]
+    old_key = key
+    if scale == SCALE_MAJOR:
+        key_offset += 9
+        key_offset %= 12
+        new_key = {v: k for k, v in lp_midi.NOTE_OFFSETS.items()}[key_offset]
+        key = new_key
+        scale_set("MINOR", print_mesg=False)
+        print("[LPMM] SET RELATIVE SCALE FROM " + old_key + " MAJOR TO " + key + " MINOR")
+    elif scale == SCALE_MINOR:
+        key_offset -= 9
+        key_offset %= 12
+        new_key = {v: k for k, v in lp_midi.NOTE_OFFSETS.items()}[key_offset]
+        key = new_key
+        scale_set("MAJOR", print_mesg=False)
+        print("[LPMM] SET RELATIVE SCALE FROM " + old_key + " MINOR TO " + key + " MAJOR")
 
 def bind_function_keys():
     scaleedit_mode_bindable = lambda x, y : lp_scaleedit.set_as_mode()

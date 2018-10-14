@@ -139,6 +139,9 @@ def bind_grid():
     mode_chromatic_bindable = lambda x, y : lp_instrument.mode_set("CHROMATIC", False)
     lp_events.bind_func_with_colors(6, 1, mode_chromatic_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
 
+    scale_relative_bindable = lambda x, y : lp_instrument.scale_relative()
+    lp_events.bind_func_with_colors(2, 2, scale_relative_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+
     key_C_bindable = lambda x, y : lp_instrument.key_set("C", False)
     lp_events.bind_func_with_colors(0, 3, key_C_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
     key_Db_bindable = lambda x, y : lp_instrument.key_set("Db", False)
