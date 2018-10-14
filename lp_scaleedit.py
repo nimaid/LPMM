@@ -16,6 +16,8 @@ def update_active():
         active[4][1] = True
     elif lp_instrument.mode == "FOURTH":
         active[5][1] = True
+    elif lp_instrument.mode == "CHROMATIC":
+        active[6][1] = True
 
     if lp_instrument.key == "C":
         active[0][3] = True
@@ -134,6 +136,8 @@ def bind_grid():
     lp_events.bind_func_with_colors(4, 1, mode_third_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
     mode_fourth_bindable = lambda x, y : lp_instrument.mode_set("FOURTH", False)
     lp_events.bind_func_with_colors(5, 1, mode_fourth_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
+    mode_chromatic_bindable = lambda x, y : lp_instrument.mode_set("CHROMATIC", False)
+    lp_events.bind_func_with_colors(6, 1, mode_chromatic_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
 
     key_C_bindable = lambda x, y : lp_instrument.key_set("C", False)
     lp_events.bind_func_with_colors(0, 3, key_C_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)

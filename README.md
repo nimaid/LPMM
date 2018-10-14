@@ -34,7 +34,7 @@ Sort of! It does work as a middleman, but with only a few of the features I want
 * ~~All diatonic scale modes~~
 * MIDI in light feedback
 * ~~Chromatic scale mode system~~
-* All chromatic scale modes
+* ~~All chromatic scale modes~~
 * Drum rack scale mode
 * Scale mode selector (partially complete)
 * Relative scale, 5th left, and 5th right buttons

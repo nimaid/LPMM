@@ -72,7 +72,7 @@ def init():
             offset = 2
         elif mode == "FOURTH":
             offset = 3
-        elif mode == "CHROMATICGUITAR":
+        elif mode in ("CHROMATICGUITAR", "CHROMATIC"):
             offset = 5
 
         start_index = None
@@ -85,6 +85,8 @@ def init():
             note = None
             if mode == "CHROMATICGUITAR":
                 note = base_note + start_index + x - (row // 4) #shut up, it works perfectly
+            elif mode == "CHROMATIC":
+                note = base_note + start_index + x
             else:
                 note = full_working_scale[start_index + x]
             working_notes[-1].append(note)
