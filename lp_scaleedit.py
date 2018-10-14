@@ -120,7 +120,7 @@ def rebind_pressed_notes():
     for x in range(8):
         for y in range(1, 9):
             if lp_events.pressed[x][y] and (lp_midi.note_when_pressed[x][y] in lp_midi.curr_notes):
-                old_note = lp_instrument.working_notes[y-1][x]
+                old_note = lp_midi.note_when_pressed[x][y]
                 old_func_in = lp_events.release_funcs[x][y]
 
                 lp_events.release_funcs[x][y] = functools.partial(note_off_and_bind_old_release_func, old_func=old_func_in, note=old_note)
