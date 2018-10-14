@@ -10,6 +10,11 @@ Because Ableton is an expensive software, and I want to use the fantastically in
 ## Does it work yet?
 Sort of! It does work as a middleman, but with only a few of the features I want. See below for a todo list. I have a life (a crazy one at that), so no promises on a delivery date. Feel free to offer your help!
 
+## How do I use it?
+Plug your Launchpad MkII (for now, Pro and others are coming) in, then run LPMM.py with Python 3, either through IDLE or "python3 LPMM.py". 
+As for key bindings, I am trying to make it as close as possible to Launchpad95. Currently, all features that are in LPMM are exactly equivilant to the Launchpad95 script layout. Unimplemented features simply have their buttons unbound and unlit.
+http://motscousus.com/stuff/2011-07_Novation_Launchpad_Ableton_Live_Scripts/
+
 ## What still needs to be written?
 ### Global
 * ~~Launchpad MkII Specific Interface~~
