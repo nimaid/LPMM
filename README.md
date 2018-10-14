@@ -36,8 +36,9 @@ Sort of! It does work as a middleman, but with only a few of the features I want
 * ~~Chromatic scale mode system~~
 * ~~All chromatic scale modes~~
 * Drum rack scale mode
-* Scale mode selector (partially complete)
-* Relative scale, 5th left, and 5th right buttons
+* Scale mode selector (mostly complete, DRUMRACK remaining)
+* Relative scale button
+* ~~5th left, and 5th right buttons~~
 * Quick Scale Mode
 * Remaining minor Scale Edit Mode Features
 ### Mixer Mode

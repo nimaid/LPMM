@@ -164,6 +164,11 @@ def bind_grid():
     key_B_bindable = lambda x, y : lp_instrument.key_set("B", False)
     lp_events.bind_func_with_colors(6, 3, key_B_bindable, lp_colors.GREEN_THIRD, lp_colors.GREEN, lp_colors.update_bindable)
 
+    key_fifth_left_bindable = lambda x, y : lp_instrument.key_fifth_left()
+    lp_events.bind_func_with_colors(6, 2, key_fifth_left_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+    key_fifth_right_bindable = lambda x, y : lp_instrument.key_fifth_right()
+    lp_events.bind_func_with_colors(7, 3, key_fifth_right_bindable, lp_colors.BLUE_THIRD, lp_colors.BLUE, lp_colors.update_bindable)
+
     oct_neg2_bindable = lambda x, y : lp_instrument.octave_set(-2, False)
     if lp_instrument.octave_is_valid(-2):
         lp_events.bind_func_with_colors(0, 4, oct_neg2_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)

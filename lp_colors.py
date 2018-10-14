@@ -81,7 +81,7 @@ def update():
         for x in range(8):
             for y in range(1, 9):
                 set_color = None
-                if lp_scaleedit.active[x][y]:
+                if lp_scaleedit.active[x][y] or lp_events.pressed[x][y]:
                     set_color = effect_colors[x][y]
                 else:
                     set_color = curr_colors[x][y]

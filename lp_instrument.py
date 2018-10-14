@@ -207,7 +207,7 @@ def octave_set(oct_in, rebind=True):
     lp_colors.update()
     print("[LPMM] OCTAVE SET, NOW " + str(octave))
 
-def key_set(key_in, rebind=True):
+def key_set(key_in, rebind=True, print_mesg=True):
     global key
     key = key_in
     octave_clip()
@@ -219,7 +219,26 @@ def key_set(key_in, rebind=True):
         lp_scaleedit.bind_grid()
         lp_scaleedit.bind_function_keys()
     lp_colors.update()
-    print("[LPMM] KEY SET, NOW " + key)
+    if print_mesg:
+        print("[LPMM] KEY SET, NOW " + key)
+
+def key_fifth_right():
+    global key
+    key_offset = lp_midi.NOTE_OFFSETS[key]
+    key_offset += 5
+    key_offset %= 12
+    new_key = {v: k for k, v in lp_midi.NOTE_OFFSETS.items()}[key_offset]
+    key_set(new_key, print_mesg=False)
+    print("[LPMM] KEY MOVED FIFTH RIGHT, NOW " + key)
+
+def key_fifth_left():
+    global key
+    key_offset = lp_midi.NOTE_OFFSETS[key]
+    key_offset -= 5
+    key_offset %= 12
+    new_key = {v: k for k, v in lp_midi.NOTE_OFFSETS.items()}[key_offset]
+    key_set(new_key, print_mesg=False)
+    print("[LPMM] KEY MOVED FIFTH LEFT, NOW " + key)
 
 def mode_set(mode_in, rebind=True):
     global mode
