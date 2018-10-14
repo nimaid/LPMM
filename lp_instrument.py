@@ -72,15 +72,21 @@ def init():
             offset = 2
         elif mode == "FOURTH":
             offset = 3
+        elif mode == "CHROMATICGUITAR":
+            offset = 5
 
         start_index = None
         if mode == "SEQUENT":
             start_index = len(scale) * row
         else:
-            start_index = (row * offset)
+            start_index = row * offset
 
         for x in range(8):
-            note = full_working_scale[start_index + x]
+            note = None
+            if mode == "CHROMATICGUITAR":
+                note = base_note + start_index + x - (row // 4) #shut up, it works perfectly
+            else:
+                note = full_working_scale[start_index + x]
             working_notes[-1].append(note)
 
         working_notes[-1].append(None)
@@ -156,8 +162,6 @@ def octave_clip():
         new_octave += 1
     if octave_is_valid(new_octave):
         octave = new_octave
-    else:
-        print("ERROR! NO OCTAVES ARE VALID!!!")
 
 def octave_up(rebind=True):
     global octave

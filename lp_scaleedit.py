@@ -8,7 +8,9 @@ def update_active():
     global active
     active = [[False for y in range(9)] for x in range(9)]
 
-    if lp_instrument.mode == "SEQUENT":
+    if lp_instrument.mode == "CHROMATICGUITAR":
+        active[2][1] = True
+    elif lp_instrument.mode == "SEQUENT":
         active[3][1] = True
     elif lp_instrument.mode == "THIRD":
         active[4][1] = True
@@ -117,13 +119,15 @@ def note_off_and_bind_old_release_func(x, y, old_func, note):
 def rebind_pressed_notes():
     for x in range(8):
         for y in range(1, 9):
-            if lp_events.pressed[x][y]:
+            if lp_events.pressed[x][y] and (lp_midi.note_when_pressed[x][y] in lp_midi.curr_notes):
                 old_note = lp_instrument.working_notes[y-1][x]
                 old_func_in = lp_events.release_funcs[x][y]
 
                 lp_events.release_funcs[x][y] = functools.partial(note_off_and_bind_old_release_func, old_func=old_func_in, note=old_note)
 
 def bind_grid():
+    mode_chromaticguitar_bindable = lambda x, y : lp_instrument.mode_set("CHROMATICGUITAR", False)
+    lp_events.bind_func_with_colors(2, 1, mode_chromaticguitar_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
     mode_sequent_bindable = lambda x, y : lp_instrument.mode_set("SEQUENT", False)
     lp_events.bind_func_with_colors(3, 1, mode_sequent_bindable, lp_colors.RED_THIRD, lp_colors.RED, lp_colors.update_bindable)
     mode_third_bindable = lambda x, y : lp_instrument.mode_set("THIRD", False)
